@@ -1,17 +1,26 @@
 // components/Header.tsx
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { FaBars, FaTimes, FaHandshake, FaPhoneAlt } from "react-icons/fa"; // Removed unused FaUserTie
+import {
+  FaBars,
+  FaTimes,
+  FaHandshake,
+  FaPhoneAlt,
+  FaChevronDown,
+  FaChevronUp,
+} from "react-icons/fa";
 import { motion } from "framer-motion";
 import logo from "../assets/logo.png";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const location = useLocation();
 
   useEffect(() => {
     setIsMenuOpen(false);
+    setOpenDropdown(null);
   }, [location]);
 
   useEffect(() => {
@@ -22,12 +31,26 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
+  const toggleDropdown = (dropdown: string) => {
+    setOpenDropdown(openDropdown === dropdown ? null : dropdown);
+  };
+
+  const mainNavLinks = [
     { path: "/", label: "Home" },
     { path: "/about", label: "About Us" },
     { path: "/services", label: "Services" },
-    { path: "/partners", label: "Partners" },
-    { path: "/contact", label: "Contact" },
+  ];
+
+  const companyNavLinks = [
+    { path: "/how-it-works", label: "How It Works" },
+    { path: "/why-tms", label: "Why Choose Us" },
+    { path: "/team", label: "Our Team" },
+  ];
+
+  const partnerNavLinks = [
+    { path: "/partners", label: "Our Partners" },
+    { path: "/why-partner", label: "Partner Benefits" },
+    { path: "/testimonials", label: "Success Stories" },
   ];
 
   return (
@@ -64,7 +87,8 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
-            {navLinks.map((link) => (
+            {/* Main Links */}
+            {mainNavLinks.map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}
@@ -95,6 +119,132 @@ export default function Header() {
                 )}
               </NavLink>
             ))}
+
+            {/* Company Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => toggleDropdown("company")}
+                className={`flex items-center px-4 py-2 rounded-md transition-colors ${
+                  openDropdown === "company" ||
+                  companyNavLinks.some(
+                    (link) => location.pathname === link.path
+                  )
+                    ? "text-yellow-300 font-medium bg-primary-dark/80"
+                    : "text-gray-200 hover:text-yellow-300 hover:bg-primary-dark/30"
+                }`}
+              >
+                <span>Company</span>
+                {openDropdown === "company" ? (
+                  <FaChevronUp className="ml-1 text-sm text-yellow-300" />
+                ) : (
+                  <FaChevronDown className="ml-1 text-sm" />
+                )}
+              </button>
+
+              {openDropdown === "company" && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg z-50 border border-gray-100"
+                >
+                  <div className="py-1">
+                    {companyNavLinks.map((link) => (
+                      <NavLink
+                        key={link.path}
+                        to={link.path}
+                        className={({ isActive }) =>
+                          `block px-4 py-2.5 text-gray-800 hover:bg-yellow-400 hover:text-gray-900 
+              transition-colors duration-200 ${
+                isActive ? "bg-yellow-400 text-gray-900 font-medium" : ""
+              }`
+                        }
+                      >
+                        {link.label}
+                      </NavLink>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </div>
+
+            {/* Partners Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => toggleDropdown("partners")}
+                className={`flex items-center px-4 py-2 rounded-md transition-colors ${
+                  openDropdown === "partners" ||
+                  partnerNavLinks.some(
+                    (link) => location.pathname === link.path
+                  )
+                    ? "text-yellow-300 font-medium bg-primary-dark/80"
+                    : "text-gray-200 hover:text-yellow-300 hover:bg-primary-dark/30"
+                }`}
+              >
+                <span>Partners</span>
+                {openDropdown === "partners" ? (
+                  <FaChevronUp className="ml-1 text-sm text-yellow-300" />
+                ) : (
+                  <FaChevronDown className="ml-1 text-sm" />
+                )}
+              </button>
+
+              {openDropdown === "partners" && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg z-50 border border-gray-100"
+                >
+                  <div className="py-1">
+                    {partnerNavLinks.map((link) => (
+                      <NavLink
+                        key={link.path}
+                        to={link.path}
+                        className={({ isActive }) =>
+                          `block px-4 py-2.5 text-gray-800 hover:bg-yellow-400 hover:text-gray-900 
+              transition-colors duration-200 ${
+                isActive ? "bg-yellow-400 text-gray-900 font-medium" : ""
+              }`
+                        }
+                      >
+                        {link.label}
+                      </NavLink>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </div>
+
+            {/* Contact Link */}
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `relative px-4 py-2 rounded-md transition-colors ${
+                  isActive
+                    ? "text-white font-medium"
+                    : "text-gray-200 hover:text-white hover:bg-primary-dark/30"
+                }`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  <span>Contact</span>
+                  {isActive && (
+                    <motion.span
+                      className="absolute bottom-0 left-1/4 w-1/2 h-0.5 bg-yellow-400"
+                      layoutId="activeIndicator"
+                      initial={false}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                </>
+              )}
+            </NavLink>
 
             {/* CTA Buttons */}
             <div className="flex items-center space-x-3 ml-6">
@@ -154,7 +304,8 @@ export default function Header() {
           transition={{ duration: 0.3 }}
         >
           <nav className="flex flex-col space-y-3">
-            {navLinks.map((link) => (
+            {/* Main Links */}
+            {mainNavLinks.map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}
@@ -170,6 +321,115 @@ export default function Header() {
               </NavLink>
             ))}
 
+            {/* Company Accordion */}
+            <div className="flex flex-col">
+              <button
+                onClick={() => toggleDropdown("company-mobile")}
+                className={`px-4 py-3 rounded-md transition-colors flex items-center justify-between ${
+                  openDropdown === "company-mobile" ||
+                  companyNavLinks.some(
+                    (link) => location.pathname === link.path
+                  )
+                    ? "bg-yellow-400 text-gray-900 font-semibold"
+                    : "hover:bg-primary-dark"
+                }`}
+              >
+                <span>Company</span>
+                {openDropdown === "company-mobile" ? (
+                  <FaChevronUp className="ml-1 text-sm" />
+                ) : (
+                  <FaChevronDown className="ml-1 text-sm" />
+                )}
+              </button>
+
+              {openDropdown === "company-mobile" && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="pl-6"
+                >
+                  {companyNavLinks.map((link) => (
+                    <NavLink
+                      key={link.path}
+                      to={link.path}
+                      className={({ isActive }) =>
+                        `block px-4 py-3 rounded-md transition-colors ${
+                          isActive
+                            ? "bg-yellow-400 text-gray-900 font-semibold"
+                            : "hover:bg-primary-dark"
+                        }`
+                      }
+                    >
+                      {link.label}
+                    </NavLink>
+                  ))}
+                </motion.div>
+              )}
+            </div>
+
+            {/* Partners Accordion */}
+            <div className="flex flex-col">
+              <button
+                onClick={() => toggleDropdown("partners-mobile")}
+                className={`px-4 py-3 rounded-md transition-colors flex items-center justify-between ${
+                  openDropdown === "partners-mobile" ||
+                  partnerNavLinks.some(
+                    (link) => location.pathname === link.path
+                  )
+                    ? "bg-yellow-400 text-gray-900 font-semibold"
+                    : "hover:bg-primary-dark"
+                }`}
+              >
+                <span>Partners</span>
+                {openDropdown === "partners-mobile" ? (
+                  <FaChevronUp className="ml-1 text-sm" />
+                ) : (
+                  <FaChevronDown className="ml-1 text-sm" />
+                )}
+              </button>
+
+              {openDropdown === "partners-mobile" && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="pl-6"
+                >
+                  {partnerNavLinks.map((link) => (
+                    <NavLink
+                      key={link.path}
+                      to={link.path}
+                      className={({ isActive }) =>
+                        `block px-4 py-3 rounded-md transition-colors ${
+                          isActive
+                            ? "bg-yellow-400 text-gray-900 font-semibold"
+                            : "hover:bg-primary-dark"
+                        }`
+                      }
+                    >
+                      {link.label}
+                    </NavLink>
+                  ))}
+                </motion.div>
+              )}
+            </div>
+
+            {/* Contact Link */}
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `px-4 py-3 rounded-md transition-colors flex items-center ${
+                  isActive
+                    ? "bg-yellow-400 text-gray-900 font-semibold"
+                    : "hover:bg-primary-dark"
+                }`
+              }
+            >
+              <span>Contact</span>
+            </NavLink>
+
+            {/* Mobile CTA Buttons */}
             <div className="grid grid-cols-2 gap-3 mt-2">
               <motion.div whileTap={{ scale: 0.95 }}>
                 <NavLink

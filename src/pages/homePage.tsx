@@ -22,10 +22,14 @@ import { FiSend } from "react-icons/fi";
 import heroBg from "../assets/hero-bg3.jpg";
 import aboutBg from "../assets/hero-bg1.jpg";
 import partnersBg from "../assets/hero-bg2.jpg";
+import TeamSection from "../components/teamSection";
+import Header from "../components/header";
 
 const HomePage = () => {
   return (
     <div className="bg-gray-50 text-gray-800 font-sans">
+      {/*Header Section*/}
+      <Header />
       {/* Hero Section with Parallax Effect */}
       <section
         className="relative min-h-screen flex items-center justify-center overflow-hidden text-white"
@@ -572,6 +576,8 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      {/* Team Section */}
+      <TeamSection />
 
       {/* Why Partner Section */}
       <section className="py-28 bg-gray-50">

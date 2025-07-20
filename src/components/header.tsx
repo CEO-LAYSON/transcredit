@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaHandshake, FaPhoneAlt } from "react-icons/fa"; // Removed unused FaUserTie
 import { motion } from "framer-motion";
+import logo from "../assets/logo.png";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,9 +48,9 @@ export default function Header() {
             <NavLink to="/" className="flex items-center">
               <div className="bg-white rounded-full p-2">
                 <img
-                  src="/logo.png" // Replace with your logo path
+                  src={logo}
                   alt="Transcredit Microfinance Services Logo"
-                  className="h-8 w-8 md:h-10 md:w-10 transition-transform duration-300 hover:scale-105"
+                  className="h-8 w-8 md:h-10 md:w-10 transition-all duration-300 hover:scale-110 transform-gpu"
                 />
               </div>
               <h1 className="text-xl md:text-2xl font-bold ml-3">

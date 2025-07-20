@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import KabendaImg from "../assets/team/kabenda.jpg";
+import KabendaImg from "../assets/team/kabenda.png";
 import asheriImg from "../assets/team/asheri.jpg";
 import mwangalabaImg from "../assets/team/mwangalaba.jpg";
 import gikiImg from "../assets/team/giki.png";

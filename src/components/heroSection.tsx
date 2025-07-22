@@ -10,6 +10,7 @@ import heroBg4 from "../assets/hero-bg4.jpg";
 import heroBg5 from "../assets/hero-bg5.jpg";
 import heroBg6 from "../assets/hero-bg6.jpg";
 import heroBg7 from "../assets/hero-bg7.jpg";
+import { Link } from "react-router-dom";
 
 const backgrounds = [
   { image: heroBg1, overlay: "rgba(0, 84, 82, 0.4)" },
@@ -150,9 +151,11 @@ export default function HeroSection() {
             </div>
 
             {/* CTA Button - Responsive sizing */}
-            <button className="bg-[#D20000] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-bold shadow-lg hover:bg-[#B00000] transition-all text-sm sm:text-base md:text-lg w-full max-w-xs sm:max-w-sm">
-              Become a Partner →
-            </button>
+            <Link to="/apply">
+              <button className="bg-[#D20000] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-bold shadow-lg hover:bg-[#B00000] transition-all text-sm sm:text-base md:text-lg w-full max-w-xs sm:max-w-sm">
+                Become a Partner →
+              </button>
+            </Link>
           </motion.div>
         </div>
       </div>

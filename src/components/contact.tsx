@@ -13,7 +13,7 @@ import { FiSend } from "react-icons/fi";
 
 export default function Contact() {
   return (
-    <section className="py-28 bg-gray-50">
+    <section id="contact" className="py-28 bg-gray-50">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
           <motion.h2

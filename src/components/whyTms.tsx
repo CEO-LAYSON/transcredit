@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { FaCheckCircle } from "react-icons/fa";
 export default function WhyTms() {
   return (
-    <section className="py-28 bg-white">
+    <section id="why-tms" className="py-28 bg-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
           <motion.h2

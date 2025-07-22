@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 export default function WhyPartnering() {
   return (
-    <section className="py-28 bg-gray-50">
+    <section id="why-partner" className="py-28 bg-gray-50">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
           <motion.h2

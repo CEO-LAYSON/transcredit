@@ -4,6 +4,7 @@ import aboutBg from "../assets/hero-bg1.jpg";
 export default function AboutUs() {
   return (
     <section
+      id="about"
       className="py-28 relative"
       style={{
         backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.96)), url(${aboutBg})`,

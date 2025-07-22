@@ -3,7 +3,7 @@ import { FaQuoteLeft } from "react-icons/fa";
 
 export default function Testimonials() {
   return (
-    <section className="py-28 bg-white">
+    <section id="testimonials" className="py-28 bg-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
           <motion.h2

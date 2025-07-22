@@ -10,7 +10,7 @@ import { FiSend } from "react-icons/fi";
 
 export default function OurServices() {
   return (
-    <section className="py-28 bg-white">
+    <section id="services" className="py-28 bg-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
           <motion.h2

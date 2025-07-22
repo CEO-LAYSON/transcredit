@@ -173,7 +173,10 @@ const TeamSection = () => {
   ];
 
   return (
-    <section className="py-28 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+    <section
+      id="team"
+      className="py-28 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden"
+    >
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full opacity-5">
         <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-primary blur-3xl"></div>

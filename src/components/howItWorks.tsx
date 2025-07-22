@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 export default function HowItWorks() {
   return (
-    <section className="py-28 bg-primary text-white">
+    <section id="how-it-works" className="py-28 bg-primary text-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
           <motion.h2

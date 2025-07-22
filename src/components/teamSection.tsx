@@ -4,6 +4,7 @@ import asheriImg from "../assets/team/asheri.jpg";
 import mwangalabaImg from "../assets/team/mwangalaba.jpg";
 import gikiImg from "../assets/team/giki.png";
 import elizabethImg from "../assets/team/elizabeth.jpeg";
+import nestoryImg from "../assets/team/nestoryImg.jpg";
 import {
   FaLinkedinIn,
   FaTwitter,
@@ -99,7 +100,7 @@ const TeamSection = () => {
     },
     {
       name: "Paschal Giki",
-      position: "IT Support",
+      position: "Chief Technology Officer (CTO)",
       bio: "Skilled in system deployment and fintech platform support. Manages technical integrations and ensures TLMS system reliability.",
       image: gikiImg,
       social: {
@@ -119,7 +120,7 @@ const TeamSection = () => {
       name: "Nestory Mboli",
       position: "Operations Officer",
       bio: "Experienced in client support, loan disbursement coordination, and back-office operations for microfinance institutions.",
-      image: "../assets/team/nestory.jpg",
+      image: nestoryImg,
       social: {
         linkedin: "#",
         twitter: "#",

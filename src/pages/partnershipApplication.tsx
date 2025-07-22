@@ -16,7 +16,6 @@ import {
   FaPaperclip,
   FaGlobe,
   FaMobile,
-  FaDesktop,
 } from "react-icons/fa";
 import { jsPDF } from "jspdf";
 
@@ -54,8 +53,8 @@ const formSchema = yup.object().shape({
   customerConsent: yup.string().required("Customer consent is required"),
   creditScoring: yup.string().required("Credit scoring is required"),
   creditScoringDescription: yup.string().when("creditScoring", {
-    is: "Yes",
-    then: yup.string().required("Credit scoring description is required"),
+    is: (val: string) => val === "Yes",
+    then: (schema) => schema.required("Credit scoring description is required"),
   }),
 
   // SECTION D: Loan Product Interest
@@ -72,8 +71,8 @@ const formSchema = yup.object().shape({
   // SECTION F: Compliance
   regulated: yup.string().required("Regulation status is required"),
   regulatedDetails: yup.string().when("regulated", {
-    is: "Yes",
-    then: yup.string().required("Regulation details are required"),
+    is: (val: string) => val === "Yes",
+    then: (schema) => schema.required("Regulation details are required"),
   }),
   kycAgreement: yup.string().required("KYC agreement is required"),
 });
@@ -104,6 +103,7 @@ const PartnershipForm = () => {
     { id: 6, title: "Compliance", icon: <FaFileContract /> },
   ];
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     setIsSubmitting(true);
 

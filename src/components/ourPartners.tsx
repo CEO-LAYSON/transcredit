@@ -10,7 +10,7 @@ import partnersBg from "../assets/hero-bg2.jpg";
 export default function OurPartners() {
   return (
     <section
-      id="parteners"
+      id="partners"
       className="relative py-28 text-white"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 84, 82, 0.92), rgba(0, 84, 82, 0.92)), url(${partnersBg})`,

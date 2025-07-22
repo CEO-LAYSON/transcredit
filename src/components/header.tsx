@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -271,13 +272,13 @@ export default function Header() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <a
-                  href="#become-partner"
+                <Link
+                  to="/apply"
                   className="bg-[#000000] text-white flex items-center px-4 py-2 rounded-full font-bold text-sm hover:bg-[#000000] transition-all shadow-lg"
                 >
                   <FaHandshake className="mr-2" />
                   <span>Become Partner</span>
-                </a>
+                </Link>
               </motion.div>
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -466,14 +467,14 @@ export default function Header() {
               transition={{ delay: 0.6 }}
             >
               <motion.div whileTap={{ scale: 0.95 }}>
-                <a
-                  href="#become-partner"
+                <Link
+                  to="/apply"
                   className="bg-[#000000] text-white flex items-center justify-center px-4 py-3 rounded-full font-bold text-sm hover:bg-[#B00000] transition-all"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <FaHandshake className="mr-2" />
                   <span>Become Partner</span>
-                </a>
+                </Link>
               </motion.div>
               <motion.div whileTap={{ scale: 0.95 }}>
                 <a

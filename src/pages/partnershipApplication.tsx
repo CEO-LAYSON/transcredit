@@ -18,7 +18,7 @@ import {
   FaMobile,
 } from "react-icons/fa";
 import { jsPDF } from "jspdf";
-import Header from "../components/header";
+import Header2 from "../components/header2";
 
 // Form validation schema
 const formSchema = yup.object().shape({
@@ -414,7 +414,7 @@ const PartnershipForm = () => {
 
   return (
     <div>
-      <Header />
+      <Header2 />
       <div className="min-h-screen bg-gradient-to-br from-[#005452] to-[#003332] py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           {/* Form Header */}

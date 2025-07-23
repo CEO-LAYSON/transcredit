@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import { FaHome } from "react-icons/fa";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -50,16 +49,6 @@ export default function Header() {
                   Microfinance Services
                 </p>
               </div>
-            </Link>
-          </motion.div>
-
-          {/* Home Button - Visible on all screens with both icon and text */}
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link
-              to="/"
-              className="bg-white/10 backdrop-blur-sm flex items-center px-3 py-2 sm:px-4 sm:py-2 rounded-full border border-white/20 text-xs sm:text-sm hover:bg-white/20 transition-all"
-            >
-              <FaHome className="mr-2" />
             </Link>
           </motion.div>
         </div>

@@ -1,7 +1,7 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   FaFacebookF,
-  FaTwitter,
   FaLinkedinIn,
   FaInstagram,
   FaMapMarkerAlt,
@@ -12,6 +12,44 @@ import {
 import { FiSend } from "react-icons/fi";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Create email content
+    const subject = encodeURIComponent(
+      formData.subject || "Contact Form Submission"
+    );
+    const body = encodeURIComponent(
+      `Dear Transcredit Team,\n\n` +
+        `${formData.message}\n\n` +
+        `Best regards,\n${formData.name}\n` +
+        `Email: ${formData.email}`
+    );
+
+    // Open Gmail compose window
+    window.open(
+      `https://mail.google.com/mail/?view=cm&fs=1&to=info@transcredit.co.tz&su=${subject}&body=${body}`,
+      "_blank"
+    );
+  };
+
   return (
     <section id="contact" className="py-28 bg-gray-50">
       <div className="container mx-auto px-6">
@@ -36,7 +74,7 @@ export default function Contact() {
             <h3 className="text-2xl font-semibold mb-8 text-gray-800">
               Send Us a Message
             </h3>
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -44,8 +82,12 @@ export default function Contact() {
                   </label>
                   <input
                     type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                     placeholder="Your name"
+                    required
                   />
                 </div>
                 <div>
@@ -54,8 +96,12 @@ export default function Contact() {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                     placeholder="Your email"
+                    required
                   />
                 </div>
               </div>
@@ -65,8 +111,12 @@ export default function Contact() {
                 </label>
                 <input
                   type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder="Subject"
+                  required
                 />
               </div>
               <div>
@@ -75,8 +125,12 @@ export default function Contact() {
                 </label>
                 <textarea
                   rows={5}
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder="Your message"
+                  required
                 ></textarea>
               </div>
               <motion.button
@@ -158,15 +212,6 @@ export default function Contact() {
                 </motion.a>
                 <motion.a
                   whileHover={{ y: -5 }}
-                  href="https://twitter.com/trustanzania"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-gray-100 p-4 rounded-full text-gray-700 hover:bg-blue-400 hover:text-white transition-all"
-                >
-                  <FaTwitter />
-                </motion.a>
-                <motion.a
-                  whileHover={{ y: -5 }}
                   href="https://www.linkedin.com/company/tmsmafuta"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -176,7 +221,7 @@ export default function Contact() {
                 </motion.a>
                 <motion.a
                   whileHover={{ y: -5 }}
-                  href="https://instagram.com/trustanzania"
+                  href="https://www.instagram.com/tmstanzania/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gray-100 p-4 rounded-full text-gray-700 hover:bg-pink-600 hover:text-white transition-all"

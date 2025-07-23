@@ -7,6 +7,7 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export default function OurServices() {
   return (
@@ -202,10 +203,12 @@ export default function OurServices() {
               ))}
             </ul>
 
-            <button className="w-full bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-dark transition-all flex items-center justify-center">
-              Contact Us
-              <FiSend className="ml-2" />
-            </button>
+            <Link to="/apply">
+              <button className="w-full bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-dark transition-all flex items-center justify-center">
+                Contact Us
+                <FiSend className="ml-2" />
+              </button>
+            </Link>
           </motion.div>
         </div>
       </div>

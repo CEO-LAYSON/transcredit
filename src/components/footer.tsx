@@ -1,9 +1,5 @@
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaLinkedinIn,
-  FaInstagram,
-} from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -19,16 +15,22 @@ export default function Footer() {
               Africa
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition">
+              <a
+                href="https://www.facebook.com/tmstanzania/"
+                className="text-gray-400 hover:text-white transition"
+              >
                 <FaFacebookF />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition">
-                <FaTwitter />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition">
+              <a
+                href="https://www.linkedin.com/company/tmsmafuta"
+                className="text-gray-400 hover:text-white transition"
+              >
                 <FaLinkedinIn />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition">
+              <a
+                href="https://www.instagram.com/tmstanzania/"
+                className="text-gray-400 hover:text-white transition"
+              >
                 <FaInstagram />
               </a>
             </div>
@@ -39,7 +41,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="#"
+                  href="#home"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Home
@@ -47,7 +49,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#about"
                   className="text-gray-400 hover:text-white transition"
                 >
                   About Us
@@ -55,7 +57,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#services"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Services
@@ -63,7 +65,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#partners"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Partners
@@ -71,7 +73,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#contact"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Contact
@@ -85,7 +87,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="#"
+                  href="https://transcredit.co.tz/terms-privacy-policy/"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Privacy Policy
@@ -93,7 +95,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="https://transcredit.co.tz/terms-privacy-policy/"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Terms & Conditions
@@ -105,14 +107,6 @@ export default function Footer() {
                   className="text-gray-400 hover:text-white transition"
                 >
                   FAQ
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition"
-                >
-                  Compliance
                 </a>
               </li>
             </ul>
@@ -130,20 +124,12 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/apply"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Become a Partner
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition"
-                >
-                  API Documentation
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

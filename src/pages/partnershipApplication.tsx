@@ -315,7 +315,7 @@ const PartnershipForm = () => {
       // Open Gmail compose window with parameters
       const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@transcredit.co.tz&su=${encodeURIComponent(
         subject
-      )}&body=${body}&attach=${encodeURIComponent(pdfUrl)}`;
+      )}&body=${body}`;
 
       // Try to open Gmail directly
       window.open(gmailUrl, "_blank");

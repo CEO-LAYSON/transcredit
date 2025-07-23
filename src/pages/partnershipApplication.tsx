@@ -406,6 +406,11 @@ const PartnershipForm = () => {
   };
 
   if (isSuccess) {
+    const handleGoBack = () => {
+      // Replace this with your actual navigation logic
+      window.location.reload(); // or use navigate("/"), router.push("/"), etc.
+    };
+
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#005452] to-[#003332] p-4">
         <motion.div
@@ -424,10 +429,21 @@ const PartnershipForm = () => {
             been opened in your default email client. Please send it to complete
             your application process.
           </p>
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-500 text-sm mb-8">
             If the email didn't open automatically, please send your application
-            to info@transcredit.co.tz
+            to{" "}
+            <span className="text-[#005452] font-medium">
+              info@transcredit.co.tz
+            </span>
           </p>
+
+          {/* Return Back Button */}
+          <button
+            onClick={handleGoBack}
+            className="px-6 py-3 bg-gradient-to-r from-[#005452] to-[#00736f] text-white rounded-full text-sm font-semibold shadow-md hover:shadow-lg hover:from-[#006c69] hover:to-[#005452] transition-all duration-300"
+          >
+            ← Return Back
+          </button>
         </motion.div>
       </div>
     );

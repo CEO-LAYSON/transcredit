@@ -1,10 +1,12 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { useState, useEffect, useRef, useCallback } from "react";
 import {
   FaCheckCircle,
   FaChevronLeft,
   FaChevronRight,
   FaArrowRight,
+  FaRegDotCircle,
+  FaCircle,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -196,89 +198,111 @@ const backgrounds: BackgroundContent[] = [
   },
 ];
 
-const textVariants = {
-  enter: (direction: number) => ({
-    y: direction > 0 ? 50 : -50,
-    opacity: 0,
-  }),
-  center: {
-    y: 0,
-    opacity: 1,
-  },
-  exit: (direction: number) => ({
-    y: direction > 0 ? -50 : 50,
-    opacity: 0,
-  }),
-};
-
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.8 } },
-};
-
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.15,
       delayChildren: 0.3,
+      when: "beforeChildren" as const,
     },
   },
 };
 
 const staggerItem = {
-  hidden: { y: 20, opacity: 0 },
+  hidden: {
+    y: 40,
+    opacity: 0,
+    scale: 0.95,
+  },
   visible: {
     y: 0,
     opacity: 1,
+    scale: 1,
     transition: {
       type: "spring" as const,
-      stiffness: 100,
-      damping: 10,
+      stiffness: 120,
+      damping: 12,
     },
   },
 };
 
-export default function HeroSection() {
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? "100%" : "-100%",
+    opacity: 0,
+    scale: 0.95,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      x: { type: "spring" as const, stiffness: 300, damping: 30 },
+      opacity: { duration: 0.5 },
+      scale: { duration: 0.5 },
+    },
+  },
+  exit: (direction: number) => ({
+    x: direction < 0 ? "100%" : "-100%",
+    opacity: 0,
+    scale: 0.95,
+    transition: {
+      x: { type: "spring" as const, stiffness: 300, damping: 30 },
+      opacity: { duration: 0.2 },
+    },
+  }),
+};
+
+const floatingVariants = {
+  float: {
+    y: [0, -15, 0],
+    transition: {
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut" as const,
+    },
+  },
+  pulse: {
+    scale: [1, 1.05, 1],
+    opacity: [0.8, 1, 0.8],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut" as const,
+    },
+  },
+};
+
+const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [isMobile, setIsMobile] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const intervalRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const controls = useAnimation();
+  const intervalRef = useRef<number | null>(null);
 
   const startAutoPlay = useCallback(() => {
-    intervalRef.current = setTimeout(() => {
+    intervalRef.current = window.setInterval(() => {
       setDirection(1);
       setCurrentIndex((prev) => (prev + 1) % backgrounds.length);
-      startAutoPlay();
-    }, 6000);
+    }, 7000);
   }, []);
 
   useEffect(() => {
     startAutoPlay();
     return () => {
-      if (intervalRef.current) clearTimeout(intervalRef.current);
+      if (intervalRef.current) window.clearInterval(intervalRef.current);
     };
   }, [startAutoPlay]);
 
   const goToSlide = useCallback(
     (index: number) => {
-      if (index === currentIndex) return;
-
-      setDirection(index > currentIndex ? 1 : -1);
+      const newDirection = index > currentIndex ? 1 : -1;
+      setDirection(newDirection);
       setCurrentIndex(index);
 
-      if (intervalRef.current) clearTimeout(intervalRef.current);
+      if (intervalRef.current) window.clearInterval(intervalRef.current);
       startAutoPlay();
     },
     [currentIndex, startAutoPlay]
@@ -287,97 +311,106 @@ export default function HeroSection() {
   const currentSlide = backgrounds[currentIndex];
   const { colorScheme } = currentSlide.content;
 
+  const handleHoverStart = () => {
+    controls.start("hover");
+    setIsHovering(true);
+  };
+
+  const handleHoverEnd = () => {
+    controls.start("rest");
+    setIsHovering(false);
+  };
+
+  const particles = Array.from({ length: 30 }).map((_, i) => {
+    const size = Math.random() * 8 + 4;
+    return (
+      <motion.div
+        key={i}
+        className="absolute rounded-full bg-white/20 backdrop-blur-sm"
+        initial={{
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          width: size,
+          height: size,
+          opacity: 0,
+        }}
+        animate={{
+          x: [
+            Math.random() * window.innerWidth,
+            Math.random() * window.innerWidth,
+            Math.random() * window.innerWidth,
+          ],
+          y: [
+            Math.random() * window.innerHeight,
+            Math.random() * window.innerHeight,
+            Math.random() * window.innerHeight,
+          ],
+          opacity: [0, 0.8, 0],
+          scale: [0.5, 1.2, 0.5],
+        }}
+        transition={{
+          duration: Math.random() * 25 + 15,
+          repeat: Infinity,
+          repeatDelay: Math.random() * 5,
+          ease: "linear",
+        }}
+      />
+    );
+  });
+
   return (
     <section
       id="home"
       className="relative h-screen flex items-center justify-center overflow-hidden text-white"
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
+      onMouseEnter={handleHoverStart}
+      onMouseLeave={handleHoverEnd}
     >
       {/* Particle Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-white/10"
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-              width: Math.random() * 10 + 5,
-              height: Math.random() * 10 + 5,
-            }}
-            animate={{
-              x: [
-                Math.random() * window.innerWidth,
-                Math.random() * window.innerWidth,
-                Math.random() * window.innerWidth,
-              ],
-              y: [
-                Math.random() * window.innerHeight,
-                Math.random() * window.innerHeight,
-                Math.random() * window.innerHeight,
-              ],
-              opacity: [0.2, 0.8, 0.2],
-            }}
-            transition={{
-              duration: Math.random() * 20 + 10,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
-        ))}
-      </div>
+      <div className="absolute inset-0 z-0 overflow-hidden">{particles}</div>
 
-      {/* Background Slideshow with Parallax Effect */}
+      {/* Background Slideshow */}
       <div className="absolute inset-0 overflow-hidden">
-        <AnimatePresence initial={true} custom={direction}>
+        <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentIndex}
             className="absolute inset-0"
-            initial={{ opacity: 0, x: direction * 100, scale: 1.1 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: direction * -100, scale: 1.1 }}
-            transition={{
-              duration: 1.5,
-              ease: [0.22, 1, 0.36, 1],
-              scale: { duration: 10, ease: "linear" },
-            }}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
             style={{
               backgroundImage: `linear-gradient(${colorScheme.overlay}, ${colorScheme.overlay}), url(${currentSlide.image})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              backgroundAttachment: isMobile ? "scroll" : "fixed",
             }}
-          />
+          >
+            <motion.div
+              className="absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              style={{
+                background: `linear-gradient(135deg, ${colorScheme.primary}20 0%, ${colorScheme.secondary}80 100%)`,
+              }}
+            />
+          </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Gradient Overlay */}
-      <div
-        className="absolute inset-0 z-1"
-        style={{
-          background: `linear-gradient(to bottom, ${colorScheme.primary}00 0%, ${colorScheme.secondary}80 100%)`,
-        }}
-      />
-
-      {/* Content Container */}
+      {/* Main Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10 py-12 text-center w-full max-w-6xl">
         <div className="flex flex-col items-center justify-center h-full px-4 sm:px-8">
           <AnimatePresence custom={direction} mode="wait">
             <motion.div
               key={currentIndex}
+              className="w-full"
               custom={direction}
-              variants={textVariants}
+              variants={slideVariants}
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{
-                y: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.4 },
-              }}
-              className="w-full"
             >
-              {/* Main Heading */}
               <motion.div
                 variants={staggerContainer}
                 initial="hidden"
@@ -387,64 +420,69 @@ export default function HeroSection() {
                   variants={staggerItem}
                   className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight"
                   style={{
-                    textShadow: `0 2px 10px ${colorScheme.secondary}80`,
+                    textShadow: `0 4px 20px ${colorScheme.secondary}80`,
+                    color: colorScheme.text,
                   }}
                 >
                   {currentSlide.content.title}
                 </motion.h1>
+
                 <motion.h2
                   variants={staggerItem}
-                  className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold mt-2 sm:mt-3 md:mt-4 bg-clip-text text-transparent"
+                  className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold mt-2 sm:mt-3 md:mt-4"
                   style={{
-                    backgroundImage: `linear-gradient(to right, white, ${colorScheme.accent})`,
-                    WebkitBackgroundClip: "text",
-                    textShadow: `0 2px 4px ${colorScheme.secondary}40`,
+                    color: colorScheme.textAccent,
+                    textShadow: `0 2px 10px ${colorScheme.secondary}40`,
                   }}
                 >
                   {currentSlide.content.subtitle}
                 </motion.h2>
               </motion.div>
 
-              {/* Animated Divider */}
               <motion.div
                 initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
+                animate={{
+                  scaleX: 1,
+                  boxShadow: `0 0 15px ${colorScheme.accent}`,
+                }}
                 transition={{
-                  delay: 0.3,
-                  duration: 1.2,
+                  delay: 0.4,
+                  duration: 1,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="h-0.5 sm:h-1 w-16 sm:w-24 my-6 sm:my-8 md:my-10"
+                className="h-1 w-24 sm:w-32 my-6 sm:my-8 md:my-10 mx-auto"
                 style={{
-                  background: `linear-gradient(to right, transparent, ${colorScheme.accent}, transparent)`,
-                  boxShadow: `0 0 10px ${colorScheme.accent}`,
+                  background: `linear-gradient(90deg, transparent, ${colorScheme.accent}, transparent)`,
                 }}
               />
 
-              {/* Tagline */}
               <motion.p
-                variants={fadeIn}
-                initial="hidden"
-                animate="visible"
+                variants={floatingVariants}
+                animate="float"
                 className="text-xl sm:text-2xl md:text-3xl max-w-xs sm:max-w-md md:max-w-2xl mx-auto font-medium mb-6 sm:mb-8"
-                style={{ color: colorScheme.accent }}
+                style={{
+                  color: colorScheme.textAccent,
+                  textShadow: `0 2px 8px ${colorScheme.secondary}60`,
+                }}
               >
                 {currentSlide.content.tagline}
               </motion.p>
 
-              {/* Description */}
               <motion.div
                 variants={staggerContainer}
                 initial="hidden"
                 animate="visible"
-                className="space-y-3 sm:space-y-4 w-full max-w-md sm:max-w-xl md:max-w-3xl lg:max-w-4xl px-2 sm:px-0"
+                className="space-y-4 sm:space-y-5 w-full max-w-md sm:max-w-xl md:max-w-3xl lg:max-w-4xl mx-auto"
               >
                 {currentSlide.content.description.map((paragraph, i) => (
                   <motion.p
                     key={i}
                     variants={staggerItem}
-                    className="text-sm xs:text-base sm:text-lg md:text-lg leading-relaxed sm:leading-loose"
-                    style={{ textShadow: `0 1px 3px ${colorScheme.secondary}` }}
+                    className="text-base sm:text-lg md:text-xl leading-relaxed sm:leading-loose"
+                    style={{
+                      color: colorScheme.textSecondary,
+                      textShadow: `0 1px 3px ${colorScheme.secondary}`,
+                    }}
                   >
                     {paragraph}
                   </motion.p>
@@ -455,66 +493,88 @@ export default function HeroSection() {
 
           {/* CTA Section */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
-            className="mt-6 sm:mt-8 md:mt-10 flex flex-col items-center w-full"
+            transition={{ delay: 0.8, duration: 0.8 }}
+            className="mt-8 sm:mt-10 md:mt-12 flex flex-col items-center w-full"
           >
-            {/* Highlight Badge */}
             <motion.div
+              variants={floatingVariants}
+              animate="pulse"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 bg-white/10 px-3 sm:px-4 py-1 sm:py-2 rounded-full backdrop-blur-sm border border-white/20 text-white/95 mb-4 sm:mb-6"
-              style={{ boxShadow: `0 0 15px ${colorScheme.accent}40` }}
+              className="inline-flex items-center gap-2 bg-white/10 px-4 sm:px-5 py-2 sm:py-3 rounded-full backdrop-blur-md border border-white/20 mb-5 sm:mb-7"
+              style={{
+                boxShadow: `0 0 20px ${colorScheme.accent}60`,
+                color: colorScheme.text,
+              }}
             >
               <motion.div
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 3 }}
+                animate={{
+                  rotate: [0, 15, -15, 0],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatDelay: 2,
+                }}
               >
                 <FaCheckCircle
-                  className="text-sm sm:text-base"
+                  className="text-lg sm:text-xl"
                   style={{ color: colorScheme.accent }}
                 />
               </motion.div>
-              <span className="text-xs sm:text-sm md:text-base font-medium">
+              <span className="text-sm sm:text-base md:text-lg font-medium">
                 {currentSlide.content.badgeText}
               </span>
             </motion.div>
 
-            {/* CTA Button */}
             <Link to="/apply">
               <motion.button
+                initial={{ scale: 0.95 }}
+                animate={{
+                  scale: 1,
+                  boxShadow: `0 0 0 ${colorScheme.accent}`,
+                }}
                 whileHover={{
                   scale: 1.05,
-                  boxShadow: `0 0 20px ${colorScheme.accent}`,
+                  boxShadow: `0 0 30px ${colorScheme.accent}`,
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 sm:px-10 py-3 sm:py-4 rounded-full font-bold shadow-lg transition-all text-sm sm:text-base md:text-lg w-full max-w-xs sm:max-w-sm relative overflow-hidden"
+                className="px-10 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-base sm:text-lg md:text-xl w-full max-w-sm relative overflow-hidden group"
                 style={{
                   backgroundColor: colorScheme.accent,
-                  color: "white",
+                  color: colorScheme.text,
                 }}
               >
-                <span className="relative z-10 flex items-center justify-center gap-2">
+                <span className="relative z-10 flex items-center justify-center gap-3">
                   {currentSlide.content.ctaText}
                   <motion.span
-                    animate={{ x: isHovering ? [0, 5, 0] : 0 }}
-                    transition={{ duration: 0.5, repeat: Infinity }}
+                    animate={{
+                      x: isHovering ? [0, 8, 0] : 0,
+                      rotate: isHovering ? [0, 360] : 0,
+                    }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      repeatDelay: 0.5,
+                    }}
                   >
                     <FaArrowRight />
                   </motion.span>
                 </span>
                 <motion.span
-                  className="absolute inset-0 bg-white/10"
-                  initial={{ opacity: 0 }}
+                  className="absolute inset-0 bg-white/20"
+                  initial={{ x: "-100%", opacity: 0 }}
                   animate={{
-                    opacity: [0, 0.3, 0],
-                    left: ["-100%", "100%"],
+                    x: ["-100%", "100%"],
+                    opacity: [0, 0.4, 0],
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 2.5,
                     repeat: Infinity,
-                    ease: "linear",
+                    ease: "easeInOut",
                   }}
                 />
               </motion.button>
@@ -524,84 +584,125 @@ export default function HeroSection() {
       </div>
 
       {/* Navigation Arrows */}
-      {!isMobile && (
-        <>
-          <motion.button
-            onClick={() =>
-              goToSlide(
-                (currentIndex - 1 + backgrounds.length) % backgrounds.length
-              )
-            }
-            className="absolute left-4 sm:left-8 z-20 p-2 sm:p-3 rounded-full backdrop-blur-sm transition-all"
-            style={{ backgroundColor: colorScheme.overlay }}
-            whileHover={{
-              scale: 1.1,
-              backgroundColor: colorScheme.accent,
-            }}
-            whileTap={{ scale: 0.9 }}
-            aria-label="Previous slide"
-          >
-            <FaChevronLeft className="text-xl sm:text-2xl" />
-          </motion.button>
-          <motion.button
-            onClick={() => goToSlide((currentIndex + 1) % backgrounds.length)}
-            className="absolute right-4 sm:right-8 z-20 p-2 sm:p-3 rounded-full backdrop-blur-sm transition-all"
-            style={{ backgroundColor: colorScheme.overlay }}
-            whileHover={{
-              scale: 1.1,
-              backgroundColor: colorScheme.accent,
-            }}
-            whileTap={{ scale: 0.9 }}
-            aria-label="Next slide"
-          >
-            <FaChevronRight className="text-xl sm:text-2xl" />
-          </motion.button>
-        </>
-      )}
+      <motion.div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 z-20 px-4 sm:px-6 flex justify-between">
+        <motion.button
+          onClick={() =>
+            goToSlide(
+              (currentIndex - 1 + backgrounds.length) % backgrounds.length
+            )
+          }
+          className="p-3 sm:p-4 rounded-full backdrop-blur-md"
+          style={{
+            backgroundColor: colorScheme.overlay,
+            color: colorScheme.text,
+          }}
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          whileHover={{
+            scale: 1.1,
+            backgroundColor: colorScheme.accent,
+          }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <FaChevronLeft className="text-xl sm:text-2xl" />
+        </motion.button>
+
+        <motion.button
+          onClick={() => goToSlide((currentIndex + 1) % backgrounds.length)}
+          className="p-3 sm:p-4 rounded-full backdrop-blur-md"
+          style={{
+            backgroundColor: colorScheme.overlay,
+            color: colorScheme.text,
+          }}
+          initial={{ x: 20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          whileHover={{
+            scale: 1.1,
+            backgroundColor: colorScheme.accent,
+          }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <FaChevronRight className="text-xl sm:text-2xl" />
+        </motion.button>
+      </motion.div>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-6 sm:bottom-8 left-0 right-0 flex justify-center gap-2 sm:gap-3 z-10">
+      <motion.div
+        className="absolute bottom-8 left-0 right-0 flex justify-center gap-2 z-10"
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+      >
         {backgrounds.map((_, index) => (
           <motion.button
             key={index}
             onClick={() => goToSlide(index)}
-            whileHover={{ scale: 1.2 }}
-            className={`rounded-full transition-all relative`}
-            style={{
-              width: currentIndex === index ? "24px" : "8px",
-              height: "8px",
-              backgroundColor:
-                currentIndex === index
-                  ? colorScheme.accent
-                  : "rgba(255,255,255,0.5)",
-            }}
-            aria-label={`Go to slide ${index + 1}`}
+            className="relative p-1"
+            whileHover={{ scale: 1.3 }}
+            whileTap={{ scale: 0.8 }}
           >
-            {currentIndex === index && (
-              <motion.span
-                className="absolute inset-0 rounded-full"
+            {currentIndex === index ? (
+              <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                style={{
-                  boxShadow: `0 0 8px ${colorScheme.accent}`,
-                }}
+                transition={{ type: "spring", stiffness: 500, damping: 20 }}
+              >
+                <FaCircle
+                  className="text-xs sm:text-sm"
+                  style={{ color: colorScheme.accent }}
+                />
+              </motion.div>
+            ) : (
+              <FaRegDotCircle
+                className="text-xs sm:text-sm"
+                style={{ color: colorScheme.textSecondary }}
               />
             )}
           </motion.button>
         ))}
-      </div>
+      </motion.div>
 
       {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-2 left-0 right-0 text-center z-10"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-4 left-0 right-0 text-center z-10"
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: [0, 1, 0],
+          y: [10, 0, -10],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
       >
-        <p className="text-xs text-white/80 flex items-center justify-center gap-1">
-          <span>Scroll to explore</span>
+        <p
+          className="text-xs sm:text-sm text-white/80 flex items-center justify-center gap-2"
+          style={{ color: colorScheme.textSecondary }}
+        >
           <motion.span
-            animate={{ y: [0, 5, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
+            animate={{
+              y: [0, 5, 0],
+              opacity: [0.6, 1, 0.6],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            Scroll to explore
+          </motion.span>
+          <motion.span
+            animate={{
+              y: [0, 8, 0],
+              opacity: [0.6, 1, 0.6],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.3,
+            }}
           >
             ↓
           </motion.span>
@@ -609,61 +710,44 @@ export default function HeroSection() {
       </motion.div>
 
       {/* Floating Elements */}
-      {!isMobile && (
-        <>
-          <motion.div
-            className="absolute top-1/4 left-10 w-8 h-8 rounded-full z-0"
-            style={{ backgroundColor: colorScheme.accent }}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{
-              opacity: [0, 0.4, 0],
-              scale: [0, 1, 0],
-              y: [0, -100],
-              x: [0, 50],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              repeatDelay: 3,
-              ease: "linear",
-            }}
-          />
-          <motion.div
-            className="absolute top-1/3 right-20 w-12 h-12 rounded-lg z-0"
-            style={{ backgroundColor: colorScheme.accent }}
-            initial={{ opacity: 0, scale: 0, rotate: 0 }}
-            animate={{
-              opacity: [0, 0.3, 0],
-              scale: [0, 1, 0],
-              rotate: [0, 180],
-              y: [0, -50, 50],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              repeatDelay: 5,
-              ease: "linear",
-            }}
-          />
-          <motion.div
-            className="absolute bottom-1/4 left-1/4 w-6 h-6 rounded-full z-0"
-            style={{ backgroundColor: colorScheme.accent }}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{
-              opacity: [0, 0.2, 0],
-              scale: [0, 1, 0],
-              y: [0, 100],
-              x: [0, -50],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              repeatDelay: 4,
-              ease: "linear",
-            }}
-          />
-        </>
-      )}
+      <motion.div
+        className="absolute top-1/4 left-1/4 w-10 h-10 rounded-full z-0"
+        style={{ backgroundColor: colorScheme.accent }}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{
+          opacity: [0, 0.3, 0],
+          scale: [0, 1, 0],
+          x: ["-50%", "-30%", "-50%"],
+          y: ["-50%", "-70%", "-50%"],
+          rotate: [0, 180, 360],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+
+      <motion.div
+        className="absolute bottom-1/3 right-1/4 w-12 h-12 rounded-lg z-0"
+        style={{ backgroundColor: colorScheme.accent }}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{
+          opacity: [0, 0.2, 0],
+          scale: [0, 1, 0],
+          x: ["50%", "70%", "50%"],
+          y: ["50%", "30%", "50%"],
+          rotate: [0, -180, -360],
+        }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "linear",
+          delay: 5,
+        }}
+      />
     </section>
   );
-}
+};
+
+export default HeroSection;

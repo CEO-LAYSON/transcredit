@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   FaGasPump,
   FaBusinessTime,
@@ -92,16 +93,18 @@ export default function OurPartners() {
 
         {/* CTA */}
         <div className="text-center mt-16">
-          <motion.button
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 10px 25px -5px rgba(255, 255, 255, 0.3)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-white text-primary px-8 py-4 rounded-full font-bold shadow-lg hover:bg-gray-100 transition-all"
-          >
-            Partner with Us →
-          </motion.button>
+          <Link to="/apply">
+            <motion.button
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 10px 25px -5px rgba(255, 255, 255, 0.3)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white text-primary px-8 py-4 rounded-full font-bold shadow-lg hover:bg-gray-100 transition-all"
+            >
+              Partner with Us →
+            </motion.button>
+          </Link>
         </div>
       </div>
     </section>

@@ -412,24 +412,27 @@ const PartnershipForm = () => {
     };
 
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#005452] to-[#003332] p-4">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#005452] to-[#003332] p-4 sm:p-6 md:p-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-xl shadow-2xl p-8 max-w-2xl w-full text-center"
+          className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 md:p-10 max-w-xl w-full text-center"
         >
-          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <FaCheck className="text-green-500 text-4xl" />
+          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6">
+            <FaCheck className="text-green-500 text-3xl sm:text-4xl" />
           </div>
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">
+
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-3 sm:mb-4">
             Application Submitted!
           </h2>
-          <p className="text-gray-600 mb-6">
+
+          <p className="text-gray-600 text-sm sm:text-base mb-4 sm:mb-6">
             Thank you for your partnership application. A confirmation email has
             been opened in your default email client. Please send it to complete
             your application process.
           </p>
-          <p className="text-gray-500 text-sm mb-8">
+
+          <p className="text-gray-500 text-xs sm:text-sm mb-6 sm:mb-8">
             If the email didn't open automatically, please send your application
             to{" "}
             <span className="text-[#005452] font-medium">
@@ -440,7 +443,7 @@ const PartnershipForm = () => {
           {/* Return Back Button */}
           <button
             onClick={handleGoBack}
-            className="px-6 py-3 bg-gradient-to-r from-[#005452] to-[#00736f] text-white rounded-full text-sm font-semibold shadow-md hover:shadow-lg hover:from-[#006c69] hover:to-[#005452] transition-all duration-300"
+            className="px-5 py-2.5 sm:px-6 sm:py-3 bg-gradient-to-r from-[#005452] to-[#00736f] text-white rounded-full text-sm sm:text-base font-semibold shadow-md hover:shadow-lg hover:from-[#006c69] hover:to-[#005452] transition-all duration-300"
           >
             ← Return Back
           </button>

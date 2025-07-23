@@ -31,6 +31,9 @@ interface BackgroundContent {
       secondary: string;
       accent: string;
       overlay: string;
+      text: string;
+      textSecondary: string;
+      textAccent: string;
     };
   };
 }
@@ -41,18 +44,21 @@ const backgrounds: BackgroundContent[] = [
     content: {
       title: "Transcredit",
       subtitle: "Microfinance Services",
-      tagline: "Finance Where You Are. Empowerment When You Need It.",
+      tagline: "Finance Where You Are",
       description: [
-        "TMS is pioneering Embedded Financial Services (EFS) across Tanzania and East Africa — enabling real-time access to credit directly through the platforms people use every day.",
-        "Whether you're a motorist in need of fuel, a business looking for capital, or a digital platform with thousands of users, TMS bridges the gap between need and opportunity.",
+        "Real-time credit access through platforms you use daily",
+        "Bridging financial gaps for motorists, businesses & digital platforms",
       ],
       ctaText: "Become a Partner",
-      badgeText: "Now embedded in platforms, fuel stations, and mobile apps",
+      badgeText: "Embedded in platforms & fuel stations",
       colorScheme: {
         primary: "#005452",
         secondary: "#003A38",
-        accent: "#D20000",
+        accent: "#FFD700",
         overlay: "rgba(0, 84, 82, 0.4)",
+        text: "#FFFFFF", // White text for dark backgrounds
+        textSecondary: "#F0F0F0", // Light gray for secondary text
+        textAccent: "#D20000", // Gold for highlights
       },
     },
   },
@@ -61,18 +67,21 @@ const backgrounds: BackgroundContent[] = [
     content: {
       title: "Instant Credit",
       subtitle: "When You Need It",
-      tagline: "Seamless Financial Solutions at Your Fingertips",
+      tagline: "Fast Financial Solutions",
       description: [
-        "Our innovative platform delivers instant credit approvals with minimal paperwork, integrated directly into your daily workflows.",
-        "Experience financial freedom without the traditional banking hurdles. We're redefining access to capital across East Africa.",
+        "Instant approvals with minimal paperwork",
+        "Redefining capital access across East Africa",
       ],
       ctaText: "Apply Now",
-      badgeText: "90% approval rate with instant disbursement",
+      badgeText: "90% approval rate",
       colorScheme: {
         primary: "#1A3E6F",
-        secondary: "#0F2B4D",
-        accent: "#FF6B35",
+        secondary: "#FF6B35",
+        accent: "#94c100",
         overlay: "rgba(26, 62, 111, 0.3)",
+        text: "#FFFFFF",
+        textSecondary: "#E0E0E0",
+        textAccent: "#FFA726", // Orange accent
       },
     },
   },
@@ -80,19 +89,22 @@ const backgrounds: BackgroundContent[] = [
     image: heroBg3,
     content: {
       title: "Embedded Finance",
-      subtitle: "For Digital Platforms",
-      tagline: "Monetize Your User Base with Financial Services",
+      subtitle: "For Platforms",
+      tagline: "Monetize Your User Base",
       description: [
-        "Integrate our financial solutions directly into your platform and create new revenue streams while adding value for your users.",
-        "From e-commerce to ride-hailing apps, we provide the infrastructure to offer credit, savings, and payment solutions.",
+        "Add financial services to your platform",
+        "Credit, savings & payment infrastructure",
       ],
-      ctaText: "Integrate Our API",
-      badgeText: "Trusted by 50+ platforms across East Africa",
+      ctaText: "Integrate API",
+      badgeText: "50+ platform partners",
       colorScheme: {
         primary: "#4C2A85",
         secondary: "#361D5E",
         accent: "#9C27B0",
         overlay: "rgba(76, 42, 133, 0.5)",
+        text: "#FFFFFF",
+        textSecondary: "#E0E0E0",
+        textAccent: "#BA68C8", // Light purple
       },
     },
   },
@@ -100,19 +112,22 @@ const backgrounds: BackgroundContent[] = [
     image: heroBg4,
     content: {
       title: "Fuel Financing",
-      subtitle: "For Transport Operators",
-      tagline: "Keep Moving Without Financial Friction",
+      subtitle: "For Transport",
+      tagline: "Keep Moving Forward",
       description: [
-        "Our fuel credit solutions help transport businesses manage cash flow while keeping their vehicles on the road.",
-        "With our network of partner stations, you get fuel when you need it and pay on terms that work for your business.",
+        "Fuel credit for transport businesses",
+        "200+ partner stations nationwide",
       ],
-      ctaText: "Get Fuel Credit",
-      badgeText: "Accepted at 200+ stations nationwide",
+      ctaText: "Get Credit",
+      badgeText: "Flexible payment terms",
       colorScheme: {
         primary: "#006064",
         secondary: "#004144",
         accent: "#00ACC1",
         overlay: "rgba(0, 96, 100, 0.4)",
+        text: "#FFFFFF",
+        textSecondary: "#E0F7FA", // Very light cyan
+        textAccent: "#00E5FF", // Bright cyan
       },
     },
   },
@@ -121,38 +136,38 @@ const backgrounds: BackgroundContent[] = [
     content: {
       title: "Business Growth",
       subtitle: "Capital Solutions",
-      tagline: "Accelerate Your Business with Smart Financing",
-      description: [
-        "We provide working capital and growth financing tailored to SMEs across multiple sectors.",
-        "Our data-driven approach means faster decisions and terms that align with your business cycle.",
-      ],
+      tagline: "Smart Financing",
+      description: ["Tailored SME financing", "Data-driven decisions"],
       ctaText: "Explore Loans",
-      badgeText: "Over $10M disbursed to SMEs last quarter",
+      badgeText: "$10M+ disbursed",
       colorScheme: {
         primary: "#BF360C",
         secondary: "#8C2709",
-        accent: "#FF5722",
+        accent: "#00FFFF",
         overlay: "rgba(191, 54, 12, 0.3)",
+        text: "#FFFFFF",
+        textSecondary: "#FFCCBC", // Light orange
+        textAccent: "#FFEA00", // Yellow
       },
     },
   },
   {
     image: heroBg6,
     content: {
-      title: "Mobile Integration",
-      subtitle: "For Financial Inclusion",
-      tagline: "Banking Services Without the Bank",
-      description: [
-        "We're bringing financial services to the 60% of East Africans who are underserved by traditional banks.",
-        "Through mobile integrations and agent networks, we're making finance accessible to everyone.",
-      ],
-      ctaText: "Join Our Network",
-      badgeText: "Serving 100,000+ mobile users monthly",
+      title: "Mobile Finance",
+      subtitle: "For Inclusion",
+      tagline: "Banking Without Banks",
+      description: ["Serving the unbanked", "Mobile-first solutions"],
+      ctaText: "Join Network",
+      badgeText: "100K+ monthly users",
       colorScheme: {
         primary: "#1B5E20",
         secondary: "#0D3C11",
         accent: "#4CAF50",
         overlay: "rgba(27, 94, 32, 0.5)",
+        text: "#FFFFFF",
+        textSecondary: "#C8E6C9", // Light green
+        textAccent: "#76FF03", // Bright green
       },
     },
   },
@@ -161,18 +176,21 @@ const backgrounds: BackgroundContent[] = [
     content: {
       title: "Data-Driven",
       subtitle: "Credit Scoring",
-      tagline: "Your Financial Behavior is Your Credit Score",
+      tagline: "Your Behavior = Your Score",
       description: [
-        "Our proprietary scoring model looks beyond traditional metrics to assess creditworthiness.",
-        "By analyzing digital footprints and transaction patterns, we can offer credit to those overlooked by conventional systems.",
+        "Alternative credit assessment",
+        "Reaching overlooked customers",
       ],
-      ctaText: "Learn How It Works",
-      badgeText: "70% of our customers have no formal credit history",
+      ctaText: "Learn More",
+      badgeText: "70% no formal history",
       colorScheme: {
         primary: "#311B92",
         secondary: "#1A1260",
-        accent: "#673AB7",
+        accent: "#e1fb50",
         overlay: "rgba(49, 27, 146, 0.4)",
+        text: "#FFFFFF",
+        textSecondary: "#D1C4E9", // Light purple
+        textAccent: "#B388FF", // Bright purple
       },
     },
   },

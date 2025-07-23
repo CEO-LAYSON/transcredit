@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 export default function HowItWorks() {
   return (
     <section id="how-it-works" className="py-28 bg-primary text-white">
@@ -59,13 +60,15 @@ export default function HowItWorks() {
         </div>
 
         <div className="mt-20 text-center">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-white text-primary px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-xl transition-all"
-          >
-            Start Your Application
-          </motion.button>
+          <Link to="/apply">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white text-primary px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-xl transition-all"
+            >
+              Start Your Application
+            </motion.button>
+          </Link>
         </div>
       </div>
     </section>

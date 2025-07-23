@@ -293,22 +293,43 @@ const PartnershipForm = () => {
       }
       pdf.text(`22. KYC Agreement: ${data.kycAgreement}`, 16, yPosition);
 
-      // Save PDF
+      // Save PDF first
+      pdf.save("Partnership_Application.pdf");
+
+      // Generate PDF as base64 string
       const pdfBlob = pdf.output("blob");
+
+      // Create download link and trigger download
       const pdfUrl = URL.createObjectURL(pdfBlob);
+      const link = document.createElement("a");
+      link.href = pdfUrl;
+      link.download = `Partnership_Application_${data.legalCompanyName}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
 
-      // Create mailto link
+      // Prepare email parameters
       const subject = `Partnership Application - ${data.legalCompanyName}`;
-      const body = `Dear Transcredit Team,\n\nPlease find attached our partnership application.\n\nBest regards,\n${data.primaryContact.fullName}`;
+      const body = `Dear Transcredit Team,%0D%0A%0D%0APlease find attached our partnership application.%0D%0A%0D%0ABest regards,%0D%0A${data.primaryContact.fullName}`;
 
-      // Open email client with PDF download instructions
-      window.open(
-        `mailto:info@transcredit.co.tz?subject=${encodeURIComponent(
-          subject
-        )}&body=${encodeURIComponent(
-          body + "\n\nPlease download and attach the PDF from: " + pdfUrl
-        )}`
-      );
+      // Open Gmail compose window with parameters
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@transcredit.co.tz&su=${encodeURIComponent(
+        subject
+      )}&body=${body}&attach=${encodeURIComponent(pdfUrl)}`;
+
+      // Try to open Gmail directly
+      window.open(gmailUrl, "_blank");
+
+      // Fallback to regular mailto if Gmail fails
+      setTimeout(() => {
+        if (!window.open(gmailUrl)) {
+          window.open(
+            `mailto:info@transcredit.co.tz?subject=${encodeURIComponent(
+              subject
+            )}&body=${body}`
+          );
+        }
+      }, 500);
 
       setIsSuccess(true);
     } catch (error) {

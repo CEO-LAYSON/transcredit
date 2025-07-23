@@ -149,7 +149,7 @@ export default function Contact() {
               <div className="flex space-x-4">
                 <motion.a
                   whileHover={{ y: -5 }}
-                  href="https://facebook.com/trustanzania"
+                  href="https://www.facebook.com/tmstanzania/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gray-100 p-4 rounded-full text-gray-700 hover:bg-primary hover:text-white transition-all"
@@ -167,7 +167,7 @@ export default function Contact() {
                 </motion.a>
                 <motion.a
                   whileHover={{ y: -5 }}
-                  href="https://linkedin.com/company/trusmafuta"
+                  href="https://www.linkedin.com/company/tmsmafuta"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gray-100 p-4 rounded-full text-gray-700 hover:bg-blue-600 hover:text-white transition-all"

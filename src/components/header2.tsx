@@ -60,7 +60,6 @@ export default function Header() {
               className="bg-white/10 backdrop-blur-sm flex items-center px-3 py-2 sm:px-4 sm:py-2 rounded-full border border-white/20 text-xs sm:text-sm hover:bg-white/20 transition-all"
             >
               <FaHome className="mr-2" />
-              <span>Home</span>
             </Link>
           </motion.div>
         </div>

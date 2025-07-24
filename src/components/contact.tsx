@@ -1,3 +1,4 @@
+// Contact.tsx
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -10,6 +11,10 @@ import {
   FaGlobe,
 } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
+import emailjs from "@emailjs/browser";
+
+// Initialize EmailJS
+emailjs.init("4FqHZVwUn2rfIT6YZ");
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -17,7 +22,13 @@ export default function Contact() {
     email: "",
     subject: "",
     message: "",
+    time: "",
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
+    null
+  );
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -29,25 +40,35 @@ export default function Contact() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
 
-    // Create email content
-    const subject = encodeURIComponent(
-      formData.subject || "Contact Form Submission"
-    );
-    const body = encodeURIComponent(
-      `Dear Transcredit Team,\n\n` +
-        `${formData.message}\n\n` +
-        `Best regards,\n${formData.name}\n` +
-        `Email: ${formData.email}`
-    );
+    formData.time = new Date().toLocaleString();
 
-    // Open Gmail compose window
-    window.open(
-      `https://mail.google.com/mail/?view=cm&fs=1&to=info@transcredit.co.tz&su=${subject}&body=${body}`,
-      "_blank"
-    );
+    try {
+      await emailjs.sendForm(
+        "service_3t1y7hm",
+        "template_wmnx8lh",
+        e.currentTarget as HTMLFormElement,
+        "4FqHZVwUn2rfIT6YZ"
+      );
+
+      setSubmitStatus("success");
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+        time: "",
+      });
+    } catch (error) {
+      console.error("Email sending failed:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -74,7 +95,34 @@ export default function Contact() {
             <h3 className="text-2xl font-semibold mb-8 text-gray-800">
               Send Us a Message
             </h3>
+
+            {submitStatus === "success" && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-6 p-4 bg-green-100 text-green-700 rounded-lg"
+              >
+                Thank you for your message! We'll get back to you soon.
+              </motion.div>
+            )}
+            {submitStatus === "error" && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-6 p-4 bg-red-100 text-red-700 rounded-lg"
+              >
+                There was an error sending your message. Please try again later.
+              </motion.div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
+              <input
+                type="hidden"
+                name="to_email"
+                value="info@transcredit.co.tz"
+              />
+              <input type="hidden" name="time" value={formData.time} />
+
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -85,7 +133,7 @@ export default function Contact() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Your name"
                     required
                   />
@@ -99,12 +147,13 @@ export default function Contact() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Your email"
                     required
                   />
                 </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Subject
@@ -114,11 +163,12 @@ export default function Contact() {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                   placeholder="Subject"
                   required
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Message
@@ -128,23 +178,53 @@ export default function Contact() {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                   placeholder="Your message"
                   required
                 ></textarea>
               </div>
+
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full bg-primary text-white px-6 py-4 rounded-lg font-medium hover:bg-primary-dark transition-all flex items-center justify-center"
+                disabled={isSubmitting}
+                className="w-full bg-primary text-white px-6 py-4 rounded-lg font-medium hover:bg-primary-dark transition-all flex items-center justify-center disabled:opacity-70"
               >
-                Send Message
-                <FiSend className="ml-2" />
+                {isSubmitting ? (
+                  <>
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message <FiSend className="ml-2" />
+                  </>
+                )}
               </motion.button>
             </form>
           </div>
 
+          {/* Contact Info Section */}
           <div>
             <div className="bg-white p-10 rounded-2xl shadow-lg mb-8">
               <h3 className="text-2xl font-semibold mb-6 text-gray-800">

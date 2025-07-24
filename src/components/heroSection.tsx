@@ -56,11 +56,11 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#005452",
         secondary: "#003A38",
-        accent: "#FFD700",
+        accent: "#005452",
         overlay: "rgba(0, 84, 82, 0.4)",
         text: "#FFFFFF", // White text for dark backgrounds
         textSecondary: "#F0F0F0", // Light gray for secondary text
-        textAccent: "#D20000", // Gold for highlights
+        textAccent: "#04aabd", // Gold for highlights
       },
     },
   },
@@ -78,12 +78,12 @@ const backgrounds: BackgroundContent[] = [
       badgeText: "90% approval rate",
       colorScheme: {
         primary: "#1A3E6F",
-        secondary: "#FF6B35",
-        accent: "#94c100",
+        secondary: "#0D3C11",
+        accent: "#036976", //#4CAF50
         overlay: "rgba(26, 62, 111, 0.3)",
         text: "#FFFFFF",
         textSecondary: "#E0E0E0",
-        textAccent: "#FFA726", // Orange accent
+        textAccent: "#FFFFFF", // Orange accent
       },
     },
   },
@@ -100,13 +100,13 @@ const backgrounds: BackgroundContent[] = [
       ctaText: "Integrate API",
       badgeText: "50+ platform partners",
       colorScheme: {
-        primary: "#4C2A85",
-        secondary: "#361D5E",
-        accent: "#9C27B0",
-        overlay: "rgba(76, 42, 133, 0.5)",
-        text: "#FFFFFF",
-        textSecondary: "#E0E0E0",
-        textAccent: "#BA68C8", // Light purple
+        primary: "#005452",
+        secondary: "#003A38",
+        accent: "#005452",
+        overlay: "rgba(0, 84, 82, 0.4)",
+        text: "#FFFFFF", // White text for dark backgrounds
+        textSecondary: "#F0F0F0", // Light gray for secondary text
+        textAccent: "#00E5FF", // Gold for highlights
       },
     },
   },
@@ -123,13 +123,13 @@ const backgrounds: BackgroundContent[] = [
       ctaText: "Get Credit",
       badgeText: "Flexible payment terms",
       colorScheme: {
-        primary: "#006064",
-        secondary: "#004144",
-        accent: "#00ACC1",
-        overlay: "rgba(0, 96, 100, 0.4)",
+        primary: "#311B92",
+        secondary: "#1A1260",
+        accent: "#036976",
+        overlay: "rgba(49, 27, 146, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#E0F7FA", // Very light cyan
-        textAccent: "#00E5FF", // Bright cyan
+        textSecondary: "#FFFFFF", // Light purple
+        textAccent: "#88efff", // Bright purple
       },
     },
   },
@@ -143,13 +143,13 @@ const backgrounds: BackgroundContent[] = [
       ctaText: "Explore Loans",
       badgeText: "$10M+ disbursed",
       colorScheme: {
-        primary: "#BF360C",
-        secondary: "#8C2709",
-        accent: "#00FFFF",
-        overlay: "rgba(191, 54, 12, 0.3)",
-        text: "#FFFFFF",
-        textSecondary: "#FFCCBC", // Light orange
-        textAccent: "#FFEA00", // Yellow
+        primary: "#005452",
+        secondary: "#003A38",
+        accent: "#005452",
+        overlay: "rgba(0, 84, 82, 0.4)",
+        text: "#FFFFFF", // White text for dark backgrounds
+        textSecondary: "#F0F0F0", // Light gray for secondary text
+        textAccent: "#00E5FF", // Gold for highlights
       },
     },
   },
@@ -165,11 +165,11 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#1B5E20",
         secondary: "#0D3C11",
-        accent: "#4CAF50",
+        accent: "#036976",
         overlay: "rgba(27, 94, 32, 0.5)",
         text: "#FFFFFF",
         textSecondary: "#C8E6C9", // Light green
-        textAccent: "#76FF03", // Bright green
+        textAccent: "#E0E0E0", // Bright green
       },
     },
   },
@@ -188,11 +188,11 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#311B92",
         secondary: "#1A1260",
-        accent: "#e1fb50",
+        accent: "#00ACC1",
         overlay: "rgba(49, 27, 146, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#D1C4E9", // Light purple
-        textAccent: "#B388FF", // Bright purple
+        textSecondary: "#FFFFFF", // Light purple
+        textAccent: "#88efff", // Bright purple
       },
     },
   },

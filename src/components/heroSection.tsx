@@ -55,11 +55,11 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#005452",
         secondary: "#003A38",
-        accent: "#005452",
+        accent: "#B00000", // Changed to deep red
         overlay: "rgba(0, 84, 82, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF", // Changed to white
-        textAccent: "#FFFFFF", // Changed to white
+        textSecondary: "#FFFFFF",
+        textAccent: "#FFFFFF",
       },
     },
   },
@@ -78,11 +78,11 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#1A3E6F",
         secondary: "#0D3C11",
-        accent: "#036976",
+        accent: "#B00000", // Changed to deep red
         overlay: "rgba(26, 62, 111, 0.3)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF", // Changed to white
-        textAccent: "#FFFFFF", // Changed to white
+        textSecondary: "#FFFFFF",
+        textAccent: "#FFFFFF",
       },
     },
   },
@@ -101,11 +101,11 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#005452",
         secondary: "#003A38",
-        accent: "#005452",
+        accent: "#B00000", // Changed to deep red
         overlay: "rgba(0, 84, 82, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF", // Changed to white
-        textAccent: "#FFFFFF", // Changed to white
+        textSecondary: "#FFFFFF",
+        textAccent: "#FFFFFF",
       },
     },
   },
@@ -124,11 +124,11 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#311B92",
         secondary: "#1A1260",
-        accent: "#036976",
+        accent: "#B00000", // Changed to deep red
         overlay: "rgba(49, 27, 146, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF", // Changed to white
-        textAccent: "#FFFFFF", // Changed to white
+        textSecondary: "#FFFFFF",
+        textAccent: "#FFFFFF",
       },
     },
   },
@@ -147,11 +147,11 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#005452",
         secondary: "#003A38",
-        accent: "#005452",
+        accent: "#B00000", // Changed to deep red
         overlay: "rgba(0, 84, 82, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF", // Changed to white
-        textAccent: "#FFFFFF", // Changed to white
+        textSecondary: "#FFFFFF",
+        textAccent: "#FFFFFF",
       },
     },
   },
@@ -170,11 +170,11 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#1B5E20",
         secondary: "#0D3C11",
-        accent: "#036976",
+        accent: "#B00000", // Changed to deep red
         overlay: "rgba(27, 94, 32, 0.5)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF", // Changed to white
-        textAccent: "#FFFFFF", // Changed to white
+        textSecondary: "#FFFFFF",
+        textAccent: "#FFFFFF",
       },
     },
   },
@@ -193,11 +193,11 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#311B92",
         secondary: "#1A1260",
-        accent: "#00ACC1",
+        accent: "#B00000", // Changed to deep red
         overlay: "rgba(49, 27, 146, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF", // Changed to white
-        textAccent: "#FFFFFF", // Changed to white
+        textSecondary: "#FFFFFF",
+        textAccent: "#FFFFFF",
       },
     },
   },
@@ -405,58 +405,51 @@ const HeroSection = () => {
         </AnimatePresence>
       </div>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10 py-12 text-center w-full max-w-6xl">
-        <div className="flex flex-col items-center justify-center h-full px-4 sm:px-8">
-          <AnimatePresence custom={direction} mode="wait">
+      {/* Main Content - Centered Layout */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10 h-full flex flex-col justify-center items-center text-center">
+        <AnimatePresence custom={direction} mode="wait">
+          <motion.div
+            key={currentIndex}
+            className="w-full max-w-4xl"
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+          >
             <motion.div
-              key={currentIndex}
-              className="w-full"
-              custom={direction}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+              className="flex flex-col items-center"
             >
-              <motion.div
-                variants={staggerContainer}
-                initial="hidden"
-                animate="visible"
+              {/* Main Title */}
+              <motion.h1
+                variants={staggerItem}
+                className="text-4xl xs:text-5xl sm:text-6xl font-bold leading-tight mb-2"
+                style={{
+                  color: "#FFFFFF",
+                  fontFamily: "'Clash Display', sans-serif",
+                  textShadow: "0 2px 10px rgba(0,0,0,0.3)",
+                }}
               >
-                <motion.h1
-                  variants={staggerItem}
-                  className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tighter"
-                  style={{
-                    color: "#FFFFFF",
-                    fontFamily:
-                      "'Clash Display', -apple-system, BlinkMacSystemFont, sans-serif",
-                    fontWeight: 700,
-                    letterSpacing: "-0.03em",
-                    lineHeight: "1.1",
-                    marginBottom: "0.5rem",
-                    textShadow: "0 2px 10px rgba(0,0,0,0.3)",
-                  }}
-                >
-                  {currentSlide.content.title}
-                </motion.h1>
+                {currentSlide.content.title}
+              </motion.h1>
 
-                <motion.h2
-                  variants={staggerItem}
-                  className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold mt-2 sm:mt-3 md:mt-4"
-                  style={{
-                    color: "#FFFFFF",
-                    fontFamily:
-                      "'Clash Display', -apple-system, BlinkMacSystemFont, sans-serif",
-                    fontWeight: 600,
-                    letterSpacing: "-0.02em",
-                    lineHeight: "1.15",
-                    textShadow: "0 2px 10px rgba(0,0,0,0.3)",
-                  }}
-                >
-                  {currentSlide.content.subtitle}
-                </motion.h2>
-              </motion.div>
+              {/* Subtitle */}
+              <motion.h2
+                variants={staggerItem}
+                className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6"
+                style={{
+                  color: "#FFFFFF",
+                  fontFamily: "'Clash Display', sans-serif",
+                  textShadow: "0 2px 10px rgba(0,0,0,0.3)",
+                }}
+              >
+                {currentSlide.content.subtitle}
+              </motion.h2>
 
+              {/* Divider Line */}
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{
@@ -468,47 +461,41 @@ const HeroSection = () => {
                   duration: 1,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="h-1 w-24 sm:w-32 my-6 sm:my-8 md:my-10 mx-auto"
+                className="h-1 w-24 sm:w-32 my-4 mx-auto"
                 style={{
                   background: `linear-gradient(90deg, transparent, ${colorScheme.accent}, transparent)`,
                 }}
               />
 
+              {/* Tagline */}
               <motion.p
                 variants={floatingVariants}
                 animate="float"
-                className="text-xl sm:text-2xl md:text-3xl max-w-xs sm:max-w-md md:max-w-2xl mx-auto font-medium mb-6 sm:mb-8"
+                className="text-xl sm:text-2xl italic mb-8"
                 style={{
                   color: "#FFFFFF",
-                  fontFamily:
-                    "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-                  fontWeight: 500,
-                  letterSpacing: "0.01em",
-                  fontStyle: "italic",
+                  fontFamily: "'Inter', sans-serif",
                   textShadow: "0 2px 8px rgba(0,0,0,0.3)",
                 }}
               >
                 {currentSlide.content.tagline}
               </motion.p>
 
+              {/* Description Points */}
               <motion.div
                 variants={staggerContainer}
                 initial="hidden"
                 animate="visible"
-                className="space-y-4 sm:space-y-5 w-full max-w-md sm:max-w-xl md:max-w-3xl lg:max-w-4xl mx-auto"
+                className="space-y-3 mb-8"
               >
                 {currentSlide.content.description.map((paragraph, i) => (
                   <motion.p
                     key={i}
                     variants={staggerItem}
-                    className="text-base sm:text-lg md:text-xl leading-relaxed sm:leading-loose"
+                    className="text-lg sm:text-xl"
                     style={{
                       color: "#FFFFFF",
-                      fontFamily:
-                        "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-                      fontWeight: 400,
-                      letterSpacing: "0.01em",
-                      lineHeight: "1.6",
+                      fontFamily: "'Inter', sans-serif",
                       textShadow: "0 1px 3px rgba(0,0,0,0.3)",
                     }}
                   >
@@ -517,119 +504,109 @@ const HeroSection = () => {
                 ))}
               </motion.div>
             </motion.div>
-          </AnimatePresence>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="mt-8 sm:mt-10 md:mt-12 flex flex-col items-center w-full"
-          >
+            {/* Badge and CTA Button */}
             <motion.div
-              variants={floatingVariants}
-              animate="pulse"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 bg-white/10 px-4 sm:px-5 py-2 sm:py-3 rounded-full backdrop-blur-md border border-white/20 mb-5 sm:mb-7"
-              style={{
-                boxShadow: `0 0 20px ${colorScheme.accent}60`,
-                color: "#FFFFFF",
-              }}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="flex flex-col items-center"
             >
               <motion.div
-                animate={{
-                  rotate: [0, 15, -15, 0],
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  repeatDelay: 2,
-                }}
-              >
-                <FaCheckCircle
-                  className="text-lg sm:text-xl"
-                  style={{
-                    color: colorScheme.accent,
-                    filter: `drop-shadow(0 0 5px ${colorScheme.accent})`,
-                  }}
-                />
-              </motion.div>
-              <span
-                className="text-sm sm:text-base md:text-lg font-medium"
-                style={{
-                  fontFamily:
-                    "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-                  fontWeight: 500,
-                  letterSpacing: "0.03em",
-                  color: "#FFFFFF",
-                }}
-              >
-                {currentSlide.content.badgeText}
-              </span>
-            </motion.div>
-
-            <a href="#contact">
-              <motion.button
-                initial={{ scale: 0.95 }}
-                animate={{
-                  scale: 1,
-                  boxShadow: `0 0 0 ${colorScheme.accent}`,
-                }}
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: `0 0 30px ${colorScheme.accent}`,
-                }}
+                variants={floatingVariants}
+                animate="pulse"
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-10 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-base sm:text-lg md:text-xl w-full max-w-sm relative overflow-hidden group"
+                className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full backdrop-blur-md border border-white/20 mb-6"
                 style={{
-                  backgroundColor: colorScheme.accent,
-                  color: "#FFFFFF",
+                  boxShadow: `0 0 20px ${colorScheme.accent}60`,
                 }}
               >
-                <span
-                  className="relative z-10 flex items-center justify-center gap-3"
-                  style={{
-                    fontFamily:
-                      "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-                    fontWeight: 600,
-                    letterSpacing: "0.03em",
-                    textTransform: "uppercase",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {currentSlide.content.ctaText}
-                  <motion.span
-                    animate={{
-                      x: isHovering ? [0, 8, 0] : 0,
-                      rotate: isHovering ? [0, 360] : 0,
-                    }}
-                    transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      repeatDelay: 0.5,
-                    }}
-                  >
-                    <FaArrowRight />
-                  </motion.span>
-                </span>
-                <motion.span
-                  className="absolute inset-0 bg-white/20"
-                  initial={{ x: "-100%", opacity: 0 }}
+                <motion.div
                   animate={{
-                    x: ["-100%", "100%"],
-                    opacity: [0, 0.4, 0],
+                    rotate: [0, 15, -15, 0],
+                    scale: [1, 1.2, 1],
                   }}
                   transition={{
-                    duration: 2.5,
+                    duration: 1.5,
                     repeat: Infinity,
-                    ease: "easeInOut",
+                    repeatDelay: 2,
                   }}
-                />
-              </motion.button>
-            </a>
+                >
+                  <FaCheckCircle
+                    className="text-lg"
+                    style={{
+                      color: colorScheme.accent,
+                      filter: `drop-shadow(0 0 5px ${colorScheme.accent})`,
+                    }}
+                  />
+                </motion.div>
+                <span
+                  className="text-sm sm:text-base font-medium"
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                  }}
+                >
+                  {currentSlide.content.badgeText}
+                </span>
+              </motion.div>
+
+              <a href="#contact">
+                <motion.button
+                  initial={{ scale: 0.95 }}
+                  animate={{
+                    scale: 1,
+                    boxShadow: `0 0 0 ${colorScheme.accent}`,
+                  }}
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: `0 0 30px ${colorScheme.accent}`,
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-10 py-4 rounded-full font-bold text-lg w-full max-w-xs relative overflow-hidden group"
+                  style={{
+                    backgroundColor: "#B00000", // Deep red color
+                  }}
+                >
+                  <span
+                    className="relative z-10 flex items-center justify-center gap-3 uppercase"
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                    }}
+                  >
+                    {currentSlide.content.ctaText}
+                    <motion.span
+                      animate={{
+                        x: isHovering ? [0, 8, 0] : 0,
+                        rotate: isHovering ? [0, 360] : 0,
+                      }}
+                      transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        repeatDelay: 0.5,
+                      }}
+                    >
+                      <FaArrowRight />
+                    </motion.span>
+                  </span>
+                  <motion.span
+                    className="absolute inset-0 bg-white/20"
+                    initial={{ x: "-100%", opacity: 0 }}
+                    animate={{
+                      x: ["-100%", "100%"],
+                      opacity: [0, 0.4, 0],
+                    }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                </motion.button>
+              </a>
+            </motion.div>
           </motion.div>
-        </div>
+        </AnimatePresence>
       </div>
 
       {/* Navigation Arrows */}
@@ -649,7 +626,7 @@ const HeroSection = () => {
           animate={{ x: 0, opacity: 1 }}
           whileHover={{
             scale: 1.1,
-            backgroundColor: colorScheme.accent,
+            backgroundColor: "#B00000", // Deep red color
           }}
           whileTap={{ scale: 0.9 }}
         >
@@ -667,7 +644,7 @@ const HeroSection = () => {
           animate={{ x: 0, opacity: 1 }}
           whileHover={{
             scale: 1.1,
-            backgroundColor: colorScheme.accent,
+            backgroundColor: "#B00000", // Deep red color
           }}
           whileTap={{ scale: 0.9 }}
         >
@@ -698,8 +675,8 @@ const HeroSection = () => {
                 <FaCircle
                   className="text-xs sm:text-sm"
                   style={{
-                    color: colorScheme.accent,
-                    filter: `drop-shadow(0 0 5px ${colorScheme.accent})`,
+                    color: "#B00000", // Deep red color
+                    filter: `drop-shadow(0 0 5px #B00000)`,
                   }}
                 />
               </motion.div>
@@ -734,8 +711,7 @@ const HeroSection = () => {
           className="text-xs sm:text-sm flex items-center justify-center gap-2"
           style={{
             color: "#FFFFFF",
-            fontFamily:
-              "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+            fontFamily: "'Inter', sans-serif",
           }}
         >
           <motion.span
@@ -772,7 +748,7 @@ const HeroSection = () => {
       <motion.div
         className="absolute top-1/4 left-1/4 w-10 h-10 rounded-full z-0"
         style={{
-          backgroundColor: colorScheme.accent,
+          backgroundColor: "#B00000", // Deep red color
           filter: `blur(10px)`,
         }}
         initial={{ opacity: 0, scale: 0 }}
@@ -793,7 +769,7 @@ const HeroSection = () => {
       <motion.div
         className="absolute bottom-1/3 right-1/4 w-12 h-12 rounded-lg z-0"
         style={{
-          backgroundColor: colorScheme.accent,
+          backgroundColor: "#B00000", // Deep red color
           filter: `blur(8px)`,
         }}
         initial={{ opacity: 0, scale: 0 }}

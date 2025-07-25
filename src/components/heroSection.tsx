@@ -8,7 +8,6 @@ import {
   FaRegDotCircle,
   FaCircle,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 // Import your high-quality background images
 import heroBg1 from "../assets/hero-bg1.jpg";
@@ -59,8 +58,8 @@ const backgrounds: BackgroundContent[] = [
         accent: "#005452",
         overlay: "rgba(0, 84, 82, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#F0F0F0",
-        textAccent: "#00E5FF",
+        textSecondary: "#FFFFFF", // Changed to white
+        textAccent: "#FFFFFF", // Changed to white
       },
     },
   },
@@ -82,8 +81,8 @@ const backgrounds: BackgroundContent[] = [
         accent: "#036976",
         overlay: "rgba(26, 62, 111, 0.3)",
         text: "#FFFFFF",
-        textSecondary: "#E0E0E0",
-        textAccent: "#FFFFFF",
+        textSecondary: "#FFFFFF", // Changed to white
+        textAccent: "#FFFFFF", // Changed to white
       },
     },
   },
@@ -98,15 +97,15 @@ const backgrounds: BackgroundContent[] = [
         "Seamless access through digital channels",
       ],
       ctaText: "Apply for Capital",
-      badgeText: "$10M+ disbursed",
+      badgeText: "$100M+ disbursed",
       colorScheme: {
         primary: "#005452",
         secondary: "#003A38",
         accent: "#005452",
         overlay: "rgba(0, 84, 82, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#F0F0F0",
-        textAccent: "#00E5FF",
+        textSecondary: "#FFFFFF", // Changed to white
+        textAccent: "#FFFFFF", // Changed to white
       },
     },
   },
@@ -128,8 +127,8 @@ const backgrounds: BackgroundContent[] = [
         accent: "#036976",
         overlay: "rgba(49, 27, 146, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF",
-        textAccent: "#88efff",
+        textSecondary: "#FFFFFF", // Changed to white
+        textAccent: "#FFFFFF", // Changed to white
       },
     },
   },
@@ -151,8 +150,8 @@ const backgrounds: BackgroundContent[] = [
         accent: "#005452",
         overlay: "rgba(0, 84, 82, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#F0F0F0",
-        textAccent: "#00E5FF",
+        textSecondary: "#FFFFFF", // Changed to white
+        textAccent: "#FFFFFF", // Changed to white
       },
     },
   },
@@ -167,15 +166,15 @@ const backgrounds: BackgroundContent[] = [
         "Expanding access beyond traditional banks",
       ],
       ctaText: "Join the Network",
-      badgeText: "100K+ active monthly users",
+      badgeText: "2K+ active monthly users",
       colorScheme: {
         primary: "#1B5E20",
         secondary: "#0D3C11",
         accent: "#036976",
         overlay: "rgba(27, 94, 32, 0.5)",
         text: "#FFFFFF",
-        textSecondary: "#C8E6C9",
-        textAccent: "#E0E0E0",
+        textSecondary: "#FFFFFF", // Changed to white
+        textAccent: "#FFFFFF", // Changed to white
       },
     },
   },
@@ -197,14 +196,13 @@ const backgrounds: BackgroundContent[] = [
         accent: "#00ACC1",
         overlay: "rgba(49, 27, 146, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF",
-        textAccent: "#88efff",
+        textSecondary: "#FFFFFF", // Changed to white
+        textAccent: "#FFFFFF", // Changed to white
       },
     },
   },
 ];
 
-// Enhanced animation variants with typography effects
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
@@ -283,10 +281,6 @@ const floatingVariants = {
     },
   },
 };
-
-const textGlow = (color: string) => ({
-  textShadow: `0 0 10px ${color}, 0 0 20px ${color}40, 0 0 30px ${color}20`,
-});
 
 const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -429,46 +423,40 @@ const HeroSection = () => {
                 initial="hidden"
                 animate="visible"
               >
-                {/* Enhanced Title with professional typography */}
                 <motion.h1
                   variants={staggerItem}
                   className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tighter"
                   style={{
-                    ...textGlow(colorScheme.secondary),
-                    color: colorScheme.text,
+                    color: "#FFFFFF",
                     fontFamily:
                       "'Clash Display', -apple-system, BlinkMacSystemFont, sans-serif",
                     fontWeight: 700,
                     letterSpacing: "-0.03em",
                     lineHeight: "1.1",
                     marginBottom: "0.5rem",
+                    textShadow: "0 2px 10px rgba(0,0,0,0.3)",
                   }}
                 >
                   {currentSlide.content.title}
                 </motion.h1>
 
-                {/* Enhanced Subtitle with gradient text */}
                 <motion.h2
                   variants={staggerItem}
                   className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold mt-2 sm:mt-3 md:mt-4"
                   style={{
-                    background: `linear-gradient(45deg, ${colorScheme.textAccent}, ${colorScheme.text})`,
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    color: "transparent",
-                    ...textGlow(colorScheme.secondary),
+                    color: "#FFFFFF",
                     fontFamily:
                       "'Clash Display', -apple-system, BlinkMacSystemFont, sans-serif",
                     fontWeight: 600,
                     letterSpacing: "-0.02em",
                     lineHeight: "1.15",
+                    textShadow: "0 2px 10px rgba(0,0,0,0.3)",
                   }}
                 >
                   {currentSlide.content.subtitle}
                 </motion.h2>
               </motion.div>
 
-              {/* Animated Divider */}
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{
@@ -486,25 +474,23 @@ const HeroSection = () => {
                 }}
               />
 
-              {/* Enhanced Tagline with subtle animation */}
               <motion.p
                 variants={floatingVariants}
                 animate="float"
                 className="text-xl sm:text-2xl md:text-3xl max-w-xs sm:max-w-md md:max-w-2xl mx-auto font-medium mb-6 sm:mb-8"
                 style={{
-                  color: colorScheme.textAccent,
-                  ...textGlow(colorScheme.secondary),
+                  color: "#FFFFFF",
                   fontFamily:
                     "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
                   fontWeight: 500,
                   letterSpacing: "0.01em",
                   fontStyle: "italic",
+                  textShadow: "0 2px 8px rgba(0,0,0,0.3)",
                 }}
               >
                 {currentSlide.content.tagline}
               </motion.p>
 
-              {/* Enhanced Description with staggered animation */}
               <motion.div
                 variants={staggerContainer}
                 initial="hidden"
@@ -517,13 +503,13 @@ const HeroSection = () => {
                     variants={staggerItem}
                     className="text-base sm:text-lg md:text-xl leading-relaxed sm:leading-loose"
                     style={{
-                      color: colorScheme.textSecondary,
-                      textShadow: `0 1px 3px ${colorScheme.secondary}`,
+                      color: "#FFFFFF",
                       fontFamily:
                         "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
                       fontWeight: 400,
                       letterSpacing: "0.01em",
                       lineHeight: "1.6",
+                      textShadow: "0 1px 3px rgba(0,0,0,0.3)",
                     }}
                   >
                     {paragraph}
@@ -533,14 +519,12 @@ const HeroSection = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Enhanced CTA Section */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
             className="mt-8 sm:mt-10 md:mt-12 flex flex-col items-center w-full"
           >
-            {/* Enhanced Badge */}
             <motion.div
               variants={floatingVariants}
               animate="pulse"
@@ -549,7 +533,7 @@ const HeroSection = () => {
               className="inline-flex items-center gap-2 bg-white/10 px-4 sm:px-5 py-2 sm:py-3 rounded-full backdrop-blur-md border border-white/20 mb-5 sm:mb-7"
               style={{
                 boxShadow: `0 0 20px ${colorScheme.accent}60`,
-                color: colorScheme.text,
+                color: "#FFFFFF",
               }}
             >
               <motion.div
@@ -578,14 +562,14 @@ const HeroSection = () => {
                     "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
                   fontWeight: 500,
                   letterSpacing: "0.03em",
+                  color: "#FFFFFF",
                 }}
               >
                 {currentSlide.content.badgeText}
               </span>
             </motion.div>
 
-            {/* Enhanced CTA Button */}
-            <Link to="/apply">
+            <a href="#contact">
               <motion.button
                 initial={{ scale: 0.95 }}
                 animate={{
@@ -600,7 +584,7 @@ const HeroSection = () => {
                 className="px-10 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-base sm:text-lg md:text-xl w-full max-w-sm relative overflow-hidden group"
                 style={{
                   backgroundColor: colorScheme.accent,
-                  color: colorScheme.text,
+                  color: "#FFFFFF",
                 }}
               >
                 <span
@@ -611,6 +595,7 @@ const HeroSection = () => {
                     fontWeight: 600,
                     letterSpacing: "0.03em",
                     textTransform: "uppercase",
+                    color: "#FFFFFF",
                   }}
                 >
                   {currentSlide.content.ctaText}
@@ -642,7 +627,7 @@ const HeroSection = () => {
                   }}
                 />
               </motion.button>
-            </Link>
+            </a>
           </motion.div>
         </div>
       </div>
@@ -658,7 +643,7 @@ const HeroSection = () => {
           className="p-3 sm:p-4 rounded-full backdrop-blur-md"
           style={{
             backgroundColor: colorScheme.overlay,
-            color: colorScheme.text,
+            color: "#FFFFFF",
           }}
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -676,7 +661,7 @@ const HeroSection = () => {
           className="p-3 sm:p-4 rounded-full backdrop-blur-md"
           style={{
             backgroundColor: colorScheme.overlay,
-            color: colorScheme.text,
+            color: "#FFFFFF",
           }}
           initial={{ x: 20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -722,7 +707,7 @@ const HeroSection = () => {
               <FaRegDotCircle
                 className="text-xs sm:text-sm"
                 style={{
-                  color: colorScheme.textSecondary,
+                  color: "#FFFFFF",
                   filter: `drop-shadow(0 0 3px ${colorScheme.secondary}40)`,
                 }}
               />
@@ -731,7 +716,7 @@ const HeroSection = () => {
         ))}
       </motion.div>
 
-      {/* Enhanced Scroll Indicator */}
+      {/* Scroll Indicator */}
       <motion.div
         className="absolute bottom-4 left-0 right-0 text-center z-10"
         initial={{ opacity: 0 }}
@@ -746,9 +731,9 @@ const HeroSection = () => {
         }}
       >
         <p
-          className="text-xs sm:text-sm text-white/80 flex items-center justify-center gap-2"
+          className="text-xs sm:text-sm flex items-center justify-center gap-2"
           style={{
-            color: colorScheme.textSecondary,
+            color: "#FFFFFF",
             fontFamily:
               "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
           }}
@@ -827,11 +812,10 @@ const HeroSection = () => {
         }}
       />
 
-      {/* Additional floating elements for visual interest */}
       <motion.div
         className="absolute top-1/3 right-1/5 w-8 h-8 rounded-full z-0"
         style={{
-          backgroundColor: colorScheme.textAccent,
+          backgroundColor: "#FFFFFF",
           filter: `blur(6px)`,
         }}
         initial={{ opacity: 0, scale: 0 }}

@@ -44,160 +44,167 @@ const backgrounds: BackgroundContent[] = [
   {
     image: heroBg1,
     content: {
-      title: "Transcredit",
-      subtitle: "Microfinance Services",
-      tagline: "Finance Where You Are",
+      title: "Finance Where You Are",
+      subtitle: "Empowerment When You Need It",
+      tagline: "TMS Microfinance Services",
       description: [
-        "Real-time credit access through platforms you use daily",
-        "Bridging financial gaps for motorists, businesses & digital platforms",
+        "Revolutionizing Embedded Financial Services (EFS)",
+        "Real-time access to credit across Tanzania & East Africa",
       ],
-      ctaText: "Become a Partner",
-      badgeText: "Embedded in platforms & fuel stations",
+      ctaText: "Discover More",
+      badgeText: "Trusted by thousands across platforms",
       colorScheme: {
         primary: "#005452",
         secondary: "#003A38",
         accent: "#005452",
         overlay: "rgba(0, 84, 82, 0.4)",
-        text: "#FFFFFF", // White text for dark backgrounds
-        textSecondary: "#F0F0F0", // Light gray for secondary text
-        textAccent: "#04aabd", // Gold for highlights
+        text: "#FFFFFF",
+        textSecondary: "#F0F0F0",
+        textAccent: "#00E5FF",
       },
     },
   },
   {
     image: heroBg2,
     content: {
-      title: "Instant Credit",
-      subtitle: "When You Need It",
-      tagline: "Fast Financial Solutions",
+      title: "Motorists & Fuel Access",
+      subtitle: "Fuel Credit On the Go",
+      tagline: "Driving Tanzania Forward",
       description: [
-        "Instant approvals with minimal paperwork",
-        "Redefining capital access across East Africa",
+        "Get credit directly at fuel stations",
+        "Embedded credit for transport efficiency",
       ],
-      ctaText: "Apply Now",
-      badgeText: "90% approval rate",
+      ctaText: "Fuel Up Now",
+      badgeText: "Integrated with 200+ fuel stations",
       colorScheme: {
         primary: "#1A3E6F",
         secondary: "#0D3C11",
-        accent: "#036976", //#4CAF50
+        accent: "#036976",
         overlay: "rgba(26, 62, 111, 0.3)",
         text: "#FFFFFF",
         textSecondary: "#E0E0E0",
-        textAccent: "#FFFFFF", // Orange accent
+        textAccent: "#FFFFFF",
       },
     },
   },
   {
     image: heroBg3,
     content: {
-      title: "Embedded Finance",
-      subtitle: "For Platforms",
-      tagline: "Monetize Your User Base",
+      title: "Empowering Businesses",
+      subtitle: "Capital Without Barriers",
+      tagline: "Business Meets Finance",
       description: [
-        "Add financial services to your platform",
-        "Credit, savings & payment infrastructure",
+        "Instant financing for SMEs & traders",
+        "Seamless access through digital channels",
       ],
-      ctaText: "Integrate API",
-      badgeText: "50+ platform partners",
-      colorScheme: {
-        primary: "#005452",
-        secondary: "#003A38",
-        accent: "#005452",
-        overlay: "rgba(0, 84, 82, 0.4)",
-        text: "#FFFFFF", // White text for dark backgrounds
-        textSecondary: "#F0F0F0", // Light gray for secondary text
-        textAccent: "#00E5FF", // Gold for highlights
-      },
-    },
-  },
-  {
-    image: heroBg4,
-    content: {
-      title: "Fuel Financing",
-      subtitle: "For Transport",
-      tagline: "Keep Moving Forward",
-      description: [
-        "Fuel credit for transport businesses",
-        "200+ partner stations nationwide",
-      ],
-      ctaText: "Get Credit",
-      badgeText: "Flexible payment terms",
-      colorScheme: {
-        primary: "#311B92",
-        secondary: "#1A1260",
-        accent: "#036976",
-        overlay: "rgba(49, 27, 146, 0.4)",
-        text: "#FFFFFF",
-        textSecondary: "#FFFFFF", // Light purple
-        textAccent: "#88efff", // Bright purple
-      },
-    },
-  },
-  {
-    image: heroBg5,
-    content: {
-      title: "Business Growth",
-      subtitle: "Capital Solutions",
-      tagline: "Smart Financing",
-      description: ["Tailored SME financing", "Data-driven decisions"],
-      ctaText: "Explore Loans",
+      ctaText: "Apply for Capital",
       badgeText: "$10M+ disbursed",
       colorScheme: {
         primary: "#005452",
         secondary: "#003A38",
         accent: "#005452",
         overlay: "rgba(0, 84, 82, 0.4)",
-        text: "#FFFFFF", // White text for dark backgrounds
-        textSecondary: "#F0F0F0", // Light gray for secondary text
-        textAccent: "#00E5FF", // Gold for highlights
+        text: "#FFFFFF",
+        textSecondary: "#F0F0F0",
+        textAccent: "#00E5FF",
+      },
+    },
+  },
+  {
+    image: heroBg4,
+    content: {
+      title: "Digital Platforms",
+      subtitle: "Monetize with Embedded Finance",
+      tagline: "Your Platform, Now Financial",
+      description: [
+        "Integrate credit & savings APIs",
+        "Boost user engagement & loyalty",
+      ],
+      ctaText: "Partner With Us",
+      badgeText: "50+ digital platforms integrated",
+      colorScheme: {
+        primary: "#311B92",
+        secondary: "#1A1260",
+        accent: "#036976",
+        overlay: "rgba(49, 27, 146, 0.4)",
+        text: "#FFFFFF",
+        textSecondary: "#FFFFFF",
+        textAccent: "#88efff",
+      },
+    },
+  },
+  {
+    image: heroBg5,
+    content: {
+      title: "TMS Embedded Systems",
+      subtitle: "Everywhere You Go",
+      tagline: "Credit in Your Pocket",
+      description: [
+        "Now available in mobile apps & smart devices",
+        "Seamless integration with daily routines",
+      ],
+      ctaText: "Use On the Go",
+      badgeText: "📲 Available on apps & smart stations",
+      colorScheme: {
+        primary: "#005452",
+        secondary: "#003A38",
+        accent: "#005452",
+        overlay: "rgba(0, 84, 82, 0.4)",
+        text: "#FFFFFF",
+        textSecondary: "#F0F0F0",
+        textAccent: "#00E5FF",
       },
     },
   },
   {
     image: heroBg6,
     content: {
-      title: "Mobile Finance",
-      subtitle: "For Inclusion",
-      tagline: "Banking Without Banks",
-      description: ["Serving the unbanked", "Mobile-first solutions"],
-      ctaText: "Join Network",
-      badgeText: "100K+ monthly users",
+      title: "Financial Inclusion",
+      subtitle: "Serving the Unbanked",
+      tagline: "Empowering Every Tanzanian",
+      description: [
+        "Bridging financial gaps with mobile-first credit",
+        "Expanding access beyond traditional banks",
+      ],
+      ctaText: "Join the Network",
+      badgeText: "100K+ active monthly users",
       colorScheme: {
         primary: "#1B5E20",
         secondary: "#0D3C11",
         accent: "#036976",
         overlay: "rgba(27, 94, 32, 0.5)",
         text: "#FFFFFF",
-        textSecondary: "#C8E6C9", // Light green
-        textAccent: "#E0E0E0", // Bright green
+        textSecondary: "#C8E6C9",
+        textAccent: "#E0E0E0",
       },
     },
   },
   {
     image: heroBg7,
     content: {
-      title: "Data-Driven",
-      subtitle: "Credit Scoring",
-      tagline: "Your Behavior = Your Score",
+      title: "Need Meets Opportunity",
+      subtitle: "Data-Driven Credit Decisions",
+      tagline: "Smarter Lending for Everyone",
       description: [
-        "Alternative credit assessment",
-        "Reaching overlooked customers",
+        "Credit tailored to behavior, not just history",
+        "Unlocking potential for underserved segments",
       ],
-      ctaText: "Learn More",
-      badgeText: "70% no formal history",
+      ctaText: "Start Scoring",
+      badgeText: "AI-based risk scoring system",
       colorScheme: {
         primary: "#311B92",
         secondary: "#1A1260",
         accent: "#00ACC1",
         overlay: "rgba(49, 27, 146, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF", // Light purple
-        textAccent: "#88efff", // Bright purple
+        textSecondary: "#FFFFFF",
+        textAccent: "#88efff",
       },
     },
   },
 ];
 
+// Enhanced animation variants with typography effects
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
@@ -215,11 +222,13 @@ const staggerItem = {
     y: 40,
     opacity: 0,
     scale: 0.95,
+    filter: "blur(2px)",
   },
   visible: {
     y: 0,
     opacity: 1,
     scale: 1,
+    filter: "blur(0px)",
     transition: {
       type: "spring" as const,
       stiffness: 120,
@@ -274,6 +283,10 @@ const floatingVariants = {
     },
   },
 };
+
+const textGlow = (color: string) => ({
+  textShadow: `0 0 10px ${color}, 0 0 20px ${color}40, 0 0 30px ${color}20`,
+});
 
 const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -416,29 +429,46 @@ const HeroSection = () => {
                 initial="hidden"
                 animate="visible"
               >
+                {/* Enhanced Title with professional typography */}
                 <motion.h1
                   variants={staggerItem}
-                  className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight"
+                  className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tighter"
                   style={{
-                    textShadow: `0 4px 20px ${colorScheme.secondary}80`,
+                    ...textGlow(colorScheme.secondary),
                     color: colorScheme.text,
+                    fontFamily:
+                      "'Clash Display', -apple-system, BlinkMacSystemFont, sans-serif",
+                    fontWeight: 700,
+                    letterSpacing: "-0.03em",
+                    lineHeight: "1.1",
+                    marginBottom: "0.5rem",
                   }}
                 >
                   {currentSlide.content.title}
                 </motion.h1>
 
+                {/* Enhanced Subtitle with gradient text */}
                 <motion.h2
                   variants={staggerItem}
                   className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold mt-2 sm:mt-3 md:mt-4"
                   style={{
-                    color: colorScheme.textAccent,
-                    textShadow: `0 2px 10px ${colorScheme.secondary}40`,
+                    background: `linear-gradient(45deg, ${colorScheme.textAccent}, ${colorScheme.text})`,
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    color: "transparent",
+                    ...textGlow(colorScheme.secondary),
+                    fontFamily:
+                      "'Clash Display', -apple-system, BlinkMacSystemFont, sans-serif",
+                    fontWeight: 600,
+                    letterSpacing: "-0.02em",
+                    lineHeight: "1.15",
                   }}
                 >
                   {currentSlide.content.subtitle}
                 </motion.h2>
               </motion.div>
 
+              {/* Animated Divider */}
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{
@@ -456,18 +486,25 @@ const HeroSection = () => {
                 }}
               />
 
+              {/* Enhanced Tagline with subtle animation */}
               <motion.p
                 variants={floatingVariants}
                 animate="float"
                 className="text-xl sm:text-2xl md:text-3xl max-w-xs sm:max-w-md md:max-w-2xl mx-auto font-medium mb-6 sm:mb-8"
                 style={{
                   color: colorScheme.textAccent,
-                  textShadow: `0 2px 8px ${colorScheme.secondary}60`,
+                  ...textGlow(colorScheme.secondary),
+                  fontFamily:
+                    "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+                  fontWeight: 500,
+                  letterSpacing: "0.01em",
+                  fontStyle: "italic",
                 }}
               >
                 {currentSlide.content.tagline}
               </motion.p>
 
+              {/* Enhanced Description with staggered animation */}
               <motion.div
                 variants={staggerContainer}
                 initial="hidden"
@@ -482,6 +519,11 @@ const HeroSection = () => {
                     style={{
                       color: colorScheme.textSecondary,
                       textShadow: `0 1px 3px ${colorScheme.secondary}`,
+                      fontFamily:
+                        "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+                      fontWeight: 400,
+                      letterSpacing: "0.01em",
+                      lineHeight: "1.6",
                     }}
                   >
                     {paragraph}
@@ -491,13 +533,14 @@ const HeroSection = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* CTA Section */}
+          {/* Enhanced CTA Section */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
             className="mt-8 sm:mt-10 md:mt-12 flex flex-col items-center w-full"
           >
+            {/* Enhanced Badge */}
             <motion.div
               variants={floatingVariants}
               animate="pulse"
@@ -522,14 +565,26 @@ const HeroSection = () => {
               >
                 <FaCheckCircle
                   className="text-lg sm:text-xl"
-                  style={{ color: colorScheme.accent }}
+                  style={{
+                    color: colorScheme.accent,
+                    filter: `drop-shadow(0 0 5px ${colorScheme.accent})`,
+                  }}
                 />
               </motion.div>
-              <span className="text-sm sm:text-base md:text-lg font-medium">
+              <span
+                className="text-sm sm:text-base md:text-lg font-medium"
+                style={{
+                  fontFamily:
+                    "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+                  fontWeight: 500,
+                  letterSpacing: "0.03em",
+                }}
+              >
                 {currentSlide.content.badgeText}
               </span>
             </motion.div>
 
+            {/* Enhanced CTA Button */}
             <Link to="/apply">
               <motion.button
                 initial={{ scale: 0.95 }}
@@ -548,7 +603,16 @@ const HeroSection = () => {
                   color: colorScheme.text,
                 }}
               >
-                <span className="relative z-10 flex items-center justify-center gap-3">
+                <span
+                  className="relative z-10 flex items-center justify-center gap-3"
+                  style={{
+                    fontFamily:
+                      "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+                    fontWeight: 600,
+                    letterSpacing: "0.03em",
+                    textTransform: "uppercase",
+                  }}
+                >
                   {currentSlide.content.ctaText}
                   <motion.span
                     animate={{
@@ -648,20 +712,26 @@ const HeroSection = () => {
               >
                 <FaCircle
                   className="text-xs sm:text-sm"
-                  style={{ color: colorScheme.accent }}
+                  style={{
+                    color: colorScheme.accent,
+                    filter: `drop-shadow(0 0 5px ${colorScheme.accent})`,
+                  }}
                 />
               </motion.div>
             ) : (
               <FaRegDotCircle
                 className="text-xs sm:text-sm"
-                style={{ color: colorScheme.textSecondary }}
+                style={{
+                  color: colorScheme.textSecondary,
+                  filter: `drop-shadow(0 0 3px ${colorScheme.secondary}40)`,
+                }}
               />
             )}
           </motion.button>
         ))}
       </motion.div>
 
-      {/* Scroll Indicator */}
+      {/* Enhanced Scroll Indicator */}
       <motion.div
         className="absolute bottom-4 left-0 right-0 text-center z-10"
         initial={{ opacity: 0 }}
@@ -677,7 +747,11 @@ const HeroSection = () => {
       >
         <p
           className="text-xs sm:text-sm text-white/80 flex items-center justify-center gap-2"
-          style={{ color: colorScheme.textSecondary }}
+          style={{
+            color: colorScheme.textSecondary,
+            fontFamily:
+              "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          }}
         >
           <motion.span
             animate={{
@@ -712,7 +786,10 @@ const HeroSection = () => {
       {/* Floating Elements */}
       <motion.div
         className="absolute top-1/4 left-1/4 w-10 h-10 rounded-full z-0"
-        style={{ backgroundColor: colorScheme.accent }}
+        style={{
+          backgroundColor: colorScheme.accent,
+          filter: `blur(10px)`,
+        }}
         initial={{ opacity: 0, scale: 0 }}
         animate={{
           opacity: [0, 0.3, 0],
@@ -730,7 +807,10 @@ const HeroSection = () => {
 
       <motion.div
         className="absolute bottom-1/3 right-1/4 w-12 h-12 rounded-lg z-0"
-        style={{ backgroundColor: colorScheme.accent }}
+        style={{
+          backgroundColor: colorScheme.accent,
+          filter: `blur(8px)`,
+        }}
         initial={{ opacity: 0, scale: 0 }}
         animate={{
           opacity: [0, 0.2, 0],
@@ -744,6 +824,29 @@ const HeroSection = () => {
           repeat: Infinity,
           ease: "linear",
           delay: 5,
+        }}
+      />
+
+      {/* Additional floating elements for visual interest */}
+      <motion.div
+        className="absolute top-1/3 right-1/5 w-8 h-8 rounded-full z-0"
+        style={{
+          backgroundColor: colorScheme.textAccent,
+          filter: `blur(6px)`,
+        }}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{
+          opacity: [0, 0.15, 0],
+          scale: [0, 0.8, 0],
+          x: ["40%", "60%", "40%"],
+          y: ["-30%", "-50%", "-30%"],
+          rotate: [0, 90, 180],
+        }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: "linear",
+          delay: 3,
         }}
       />
     </section>

@@ -94,12 +94,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a
-                  href="https://transcredit.co.tz/terms-privacy-policy/"
+                <Link
+                  to="/inuka-funds-terms-and-conditions"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Inuka Fund Loan Terms
-                </a>
+                </Link>
               </li>
               <li>
                 <a

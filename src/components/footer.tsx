@@ -86,19 +86,27 @@ export default function Footer() {
             <h4 className="font-semibold mb-6">Legal & Support</h4>
             <ul className="space-y-3">
               <li>
-                <a
-                  href="https://transcredit.co.tz/terms-privacy-policy/"
+                <Link
+                  to="/privacy-terms"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Privacy Policy
-                </a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/privacy-terms"
+                  className="text-gray-400 hover:text-white transition"
+                >
+                  Terms & Conditions
+                </Link>
               </li>
               <li>
                 <a
                   href="https://transcredit.co.tz/terms-privacy-policy/"
                   className="text-gray-400 hover:text-white transition"
                 >
-                  Terms & Conditions
+                  Inuka Fund Loan Terms
                 </a>
               </li>
               <li>

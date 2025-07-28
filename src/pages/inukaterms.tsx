@@ -10,7 +10,7 @@ interface TermSection {
 export default function InukaTerms() {
   return (
     <>
-      <main className="pt-28 pb-16 bg-gradient-to-b from-white to-gray-50 text-gray-800">
+      <main className="pt-20 pb-16 bg-gradient-to-b from-white to-gray-50 text-gray-800">
         <div className="container mx-auto px-4 max-w-5xl">
           {/* Hero Section */}
           <motion.div

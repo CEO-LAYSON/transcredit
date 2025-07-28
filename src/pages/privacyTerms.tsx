@@ -10,7 +10,7 @@ import {
 export default function PrivacyTerms() {
   return (
     <>
-      <main className="pt-24 pb-16 bg-gradient-to-b from-white to-gray-50 text-gray-800">
+      <main className="pt-20 pb-16 bg-gradient-to-b from-white to-gray-50 text-gray-800">
         <div className="container mx-auto px-4 max-w-5xl">
           {/* Hero Section */}
           <motion.div
@@ -22,7 +22,7 @@ export default function PrivacyTerms() {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
               <div className="mb-6 md:mb-0">
                 <h1 className="text-3xl md:text-4xl font-bold mb-2">
-                  <span className="block">Privacy Terms for</span>
+                  <span className="block">Privacy & Terms for</span>
                   <span className="block">Emergency Loan Services</span>
                 </h1>
                 <div className="flex items-center mt-4">

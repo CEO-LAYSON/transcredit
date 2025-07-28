@@ -90,14 +90,6 @@ export default function Footer() {
                   to="/privacy-terms"
                   className="text-gray-400 hover:text-white transition"
                 >
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/privacy-terms"
-                  className="text-gray-400 hover:text-white transition"
-                >
                   Terms & Conditions
                 </Link>
               </li>

@@ -193,9 +193,7 @@ const TeamSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-extrabold text-primary mb-4">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-dark">
-              Our Leadership Team
-            </span>
+            Our Leadership Team
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-primary to-yellow-400 mx-auto rounded-full mb-6" />
           <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">

@@ -18,6 +18,7 @@ import {
   FaMobile,
 } from "react-icons/fa";
 import { jsPDF } from "jspdf";
+import autoTable from "jspdf-autotable";
 import Header2 from "../components/header2";
 
 // Form validation schema
@@ -104,203 +105,366 @@ const PartnershipForm = () => {
     { id: 6, title: "Compliance", icon: <FaFileContract /> },
   ];
 
+  //Generating a beautiful PDF
+  interface PartnershipFormData {
+    legalCompanyName: string;
+    tradingName?: string;
+    registrationNumber: string;
+    countryOfIncorporation: string;
+    physicalAddress: string;
+    websiteUrl?: string;
+    primaryContact: {
+      fullName: string;
+      position: string;
+      email: string;
+      phone: string;
+    };
+    natureOfBusiness: string[];
+    otherBusinessNature?: string;
+    businessModelDescription: string;
+    monthlyActiveUsers: string;
+    platformType: string[];
+    platformLink?: string;
+    kycInfo: string[];
+    otherKycInfo?: string;
+    customerConsent: string;
+    creditScoring: string;
+    creditScoringDescription?: string;
+    loanProducts: string[];
+    loanAmountRange: string;
+    repaymentDuration: string;
+    devTeam: string;
+    integrationTimeline: string;
+    regulated: string;
+    regulatedDetails?: string;
+    kycAgreement: string;
+  }
+
+  const generateBeautifulPDF = (data: PartnershipFormData) => {
+    const pdf = new jsPDF("p", "pt", "a4");
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const margin = 40;
+    let yPosition = 50;
+
+    // Add logo and header
+    pdf.setFontSize(20);
+    pdf.setTextColor(0, 84, 82);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("Transcredit Microfinance Services", pageWidth / 2, yPosition, {
+      align: "center",
+    });
+    yPosition += 30;
+
+    pdf.setFontSize(16);
+    pdf.text("Partner Onboarding Application", pageWidth / 2, yPosition, {
+      align: "center",
+    });
+    yPosition += 40;
+
+    // Add application date
+    pdf.setFontSize(10);
+    pdf.setTextColor(100);
+    pdf.text(
+      `Application Date: ${new Date().toLocaleDateString()}`,
+      pageWidth - margin,
+      yPosition,
+      { align: "right" }
+    );
+    yPosition += 30;
+
+    // SECTION A: Company Information
+    pdf.setFontSize(14);
+    pdf.setTextColor(0, 84, 82);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("SECTION A: COMPANY INFORMATION", margin, yPosition);
+    yPosition += 25;
+
+    const companyInfo = [
+      ["Legal Company Name", data.legalCompanyName],
+      ["Trading Name", data.tradingName || "N/A"],
+      ["Registration Number", data.registrationNumber],
+      ["Country of Incorporation", data.countryOfIncorporation],
+      ["Physical Address", data.physicalAddress],
+      ["Website URL", data.websiteUrl || "N/A"],
+    ];
+
+    autoTable(pdf, {
+      startY: yPosition,
+      head: [["Field", "Details"]],
+      body: companyInfo,
+      margin: { left: margin, right: margin },
+      styles: {
+        cellPadding: 8,
+        fontSize: 10,
+        valign: "middle",
+        halign: "left",
+      },
+      headStyles: {
+        fillColor: [0, 84, 82],
+        textColor: 255,
+        fontStyle: "bold",
+      },
+      alternateRowStyles: {
+        fillColor: [240, 240, 240],
+      },
+      columnStyles: {
+        0: { cellWidth: 150, fontStyle: "bold" },
+        1: { cellWidth: "auto" },
+      },
+    });
+
+    yPosition =
+      (pdf as jsPDF & { lastAutoTable: { finalY: number } }).lastAutoTable
+        .finalY + 15;
+
+    // Primary Contact Person
+    pdf.setFontSize(12);
+    pdf.setTextColor(0, 84, 82);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("PRIMARY CONTACT PERSON", margin, yPosition);
+    yPosition += 20;
+
+    const contactInfo = [
+      ["Full Name", data.primaryContact.fullName],
+      ["Position/Title", data.primaryContact.position],
+      ["Email", data.primaryContact.email],
+      ["Phone", data.primaryContact.phone],
+    ];
+
+    autoTable(pdf, {
+      startY: yPosition,
+      body: contactInfo,
+      margin: { left: margin, right: margin },
+      styles: {
+        cellPadding: 6,
+        fontSize: 10,
+      },
+      columnStyles: {
+        0: { cellWidth: 100, fontStyle: "bold" },
+        1: { cellWidth: "auto" },
+      },
+    });
+
+    yPosition =
+      (pdf as jsPDF & { lastAutoTable: { finalY: number } }).lastAutoTable
+        .finalY + 25;
+
+    // SECTION B: Business Model & Platform Details
+    pdf.setFontSize(14);
+    pdf.setTextColor(0, 84, 82);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("SECTION B: BUSINESS MODEL & PLATFORM DETAILS", margin, yPosition);
+    yPosition += 25;
+
+    const businessInfo = [
+      ["Nature of Business", data.natureOfBusiness.join(", ")],
+      ["Other Business Nature", data.otherBusinessNature || "N/A"],
+      ["Business Model Description", data.businessModelDescription],
+      ["Monthly Active Users", data.monthlyActiveUsers],
+      ["Platform Type", data.platformType.join(", ")],
+      ["Platform Link", data.platformLink || "N/A"],
+    ];
+
+    autoTable(pdf, {
+      startY: yPosition,
+      body: businessInfo,
+      margin: { left: margin, right: margin },
+      styles: {
+        cellPadding: 6,
+        fontSize: 10,
+      },
+      columnStyles: {
+        0: { cellWidth: 150, fontStyle: "bold" },
+        1: { cellWidth: "auto" },
+      },
+      didDrawCell: (data) => {
+        if (
+          data.section === "body" &&
+          data.column.index === 1 &&
+          data.row.index === 2
+        ) {
+          const cellValue =
+            typeof data.cell.raw === "string" ? data.cell.raw : "";
+          const lines = pdf.splitTextToSize(
+            cellValue,
+            pageWidth - margin * 2 - 150
+          );
+          data.row.height = lines.length * 10;
+        }
+      },
+    });
+
+    yPosition =
+      (pdf as jsPDF & { lastAutoTable: { finalY: number } }).lastAutoTable
+        .finalY + 25;
+
+    // SECTION C: KYC & Customer Data
+    pdf.setFontSize(14);
+    pdf.setTextColor(0, 84, 82);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("SECTION C: KYC & CUSTOMER DATA", margin, yPosition);
+    yPosition += 25;
+
+    const kycInfo = [
+      ["KYC Information Collected", data.kycInfo.join(", ")],
+      ["Other KYC Information", data.otherKycInfo || "N/A"],
+      ["Customer Consent", data.customerConsent],
+      ["Credit Scoring", data.creditScoring],
+    ];
+
+    if (data.creditScoringDescription) {
+      kycInfo.push([
+        "Credit Scoring Description",
+        data.creditScoringDescription,
+      ]);
+    }
+
+    autoTable(pdf, {
+      startY: yPosition,
+      body: kycInfo,
+      margin: { left: margin, right: margin },
+      styles: {
+        cellPadding: 6,
+        fontSize: 10,
+      },
+      columnStyles: {
+        0: { cellWidth: 150, fontStyle: "bold" },
+        1: { cellWidth: "auto" },
+      },
+    });
+
+    yPosition =
+      (pdf as jsPDF & { lastAutoTable: { finalY: number } }).lastAutoTable
+        .finalY + 25;
+
+    // SECTION D: Loan Product Interest
+    pdf.setFontSize(14);
+    pdf.setTextColor(0, 84, 82);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("SECTION D: LOAN PRODUCT INTEREST", margin, yPosition);
+    yPosition += 25;
+
+    const loanInfo = [
+      ["Loan Products", data.loanProducts.join(", ")],
+      ["Loan Amount Range", data.loanAmountRange],
+      ["Repayment Duration", data.repaymentDuration],
+    ];
+
+    autoTable(pdf, {
+      startY: yPosition,
+      body: loanInfo,
+      margin: { left: margin, right: margin },
+      styles: {
+        cellPadding: 6,
+        fontSize: 10,
+      },
+      columnStyles: {
+        0: { cellWidth: 150, fontStyle: "bold" },
+        1: { cellWidth: "auto" },
+      },
+    });
+
+    yPosition =
+      (pdf as jsPDF & { lastAutoTable: { finalY: number } }).lastAutoTable
+        .finalY + 25;
+
+    // SECTION E: Technical Integration
+    pdf.setFontSize(14);
+    pdf.setTextColor(0, 84, 82);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("SECTION E: TECHNICAL INTEGRATION", margin, yPosition);
+    yPosition += 25;
+
+    const techInfo = [
+      ["Development Team", data.devTeam],
+      ["Integration Timeline", data.integrationTimeline],
+    ];
+
+    autoTable(pdf, {
+      startY: yPosition,
+      body: techInfo,
+      margin: { left: margin, right: margin },
+      styles: {
+        cellPadding: 6,
+        fontSize: 10,
+      },
+      columnStyles: {
+        0: { cellWidth: 150, fontStyle: "bold" },
+        1: { cellWidth: "auto" },
+      },
+    });
+
+    yPosition =
+      (pdf as jsPDF & { lastAutoTable: { finalY: number } }).lastAutoTable
+        .finalY + 25;
+
+    // SECTION F: Compliance
+    pdf.setFontSize(14);
+    pdf.setTextColor(0, 84, 82);
+    pdf.setFont("helvetica", "bold");
+    pdf.text("SECTION F: COMPLIANCE", margin, yPosition);
+    yPosition += 25;
+
+    const complianceInfo = [["Regulated", data.regulated]];
+
+    if (data.regulatedDetails) {
+      complianceInfo.push(["Regulation Details", data.regulatedDetails]);
+    }
+
+    complianceInfo.push(["KYC Agreement", data.kycAgreement]);
+
+    autoTable(pdf, {
+      startY: yPosition,
+      body: complianceInfo,
+      margin: { left: margin, right: margin },
+      styles: {
+        cellPadding: 6,
+        fontSize: 10,
+      },
+      columnStyles: {
+        0: { cellWidth: 150, fontStyle: "bold" },
+        1: { cellWidth: "auto" },
+      },
+    });
+
+    // Add footer
+    const totalPages = pdf.getNumberOfPages();
+    for (let i = 1; i <= totalPages; i++) {
+      pdf.setPage(i);
+      pdf.setFontSize(8);
+      pdf.setTextColor(100);
+      pdf.text(
+        `Page ${i} of ${totalPages}`,
+        pageWidth - margin,
+        pdf.internal.pageSize.getHeight() - 20,
+        { align: "right" }
+      );
+      pdf.text(
+        "Confidential - Transcredit Microfinance Services",
+        margin,
+        pdf.internal.pageSize.getHeight() - 20
+      );
+    }
+
+    return pdf;
+  };
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     setIsSubmitting(true);
 
     try {
-      // Generate PDF
-      const pdf = new jsPDF("p", "mm", "a4");
-
-      // Add header
-      pdf.setFontSize(20);
-      pdf.setTextColor(0, 84, 82);
-      pdf.text("Transcredit Microfinance Services", 105, 20, {
-        align: "center",
-      });
-      pdf.setFontSize(16);
-      pdf.text("Partner Onboarding Application", 105, 30, { align: "center" });
-
-      // Add content
-      pdf.setFontSize(12);
-      pdf.setTextColor(0, 0, 0);
-      let yPosition = 50;
-
-      // SECTION A: Company Information
-      pdf.setFontSize(14);
-      pdf.text("SECTION A: Company Information", 14, yPosition);
-      yPosition += 10;
-
-      pdf.text(
-        `1. Legal Company Name: ${data.legalCompanyName}`,
-        16,
-        yPosition
-      );
-      yPosition += 7;
-      if (data.tradingName) {
-        pdf.text(`2. Trading Name: ${data.tradingName}`, 16, yPosition);
-        yPosition += 7;
-      }
-      pdf.text(
-        `3. Registration Number: ${data.registrationNumber}`,
-        16,
-        yPosition
-      );
-      yPosition += 7;
-      pdf.text(
-        `4. Country of Incorporation: ${data.countryOfIncorporation}`,
-        16,
-        yPosition
-      );
-      yPosition += 7;
-      pdf.text(`5. Physical Address: ${data.physicalAddress}`, 16, yPosition);
-      yPosition += 7;
-      if (data.websiteUrl) {
-        pdf.text(`6. Website URL: ${data.websiteUrl}`, 16, yPosition);
-        yPosition += 7;
-      }
-      pdf.text(`7. Primary Contact Person:`, 16, yPosition);
-      yPosition += 7;
-      pdf.text(
-        `   - Full Name: ${data.primaryContact.fullName}`,
-        16,
-        yPosition
-      );
-      yPosition += 7;
-      pdf.text(
-        `   - Position/Title: ${data.primaryContact.position}`,
-        16,
-        yPosition
-      );
-      yPosition += 7;
-      pdf.text(`   - Email: ${data.primaryContact.email}`, 16, yPosition);
-      yPosition += 7;
-      pdf.text(`   - Phone: ${data.primaryContact.phone}`, 16, yPosition);
-      yPosition += 15;
-
-      // SECTION B: Business Model & Platform Details
-      pdf.setFontSize(14);
-      pdf.text("SECTION B: Business Model & Platform Details", 14, yPosition);
-      yPosition += 10;
-
-      pdf.text(
-        `8. Nature of Business: ${data.natureOfBusiness.join(", ")}`,
-        16,
-        yPosition
-      );
-      yPosition += 7;
-      if (data.otherBusinessNature) {
-        pdf.text(`   - Other: ${data.otherBusinessNature}`, 16, yPosition);
-        yPosition += 7;
-      }
-      pdf.text(
-        `9. Business Model Description: ${data.businessModelDescription}`,
-        16,
-        yPosition
-      );
-      yPosition += 7;
-      pdf.text(
-        `10. Monthly Active Users: ${data.monthlyActiveUsers}`,
-        16,
-        yPosition
-      );
-      yPosition += 7;
-      pdf.text(
-        `11. Platform Type: ${data.platformType.join(", ")}`,
-        16,
-        yPosition
-      );
-      yPosition += 7;
-      if (data.platformLink) {
-        pdf.text(`12. Platform Link: ${data.platformLink}`, 16, yPosition);
-        yPosition += 7;
-      }
-      yPosition += 15;
-
-      // SECTION C: KYC & Customer Data
-      pdf.setFontSize(14);
-      pdf.text("SECTION C: KYC & Customer Data", 14, yPosition);
-      yPosition += 10;
-
-      pdf.text(
-        `13. KYC Information Collected: ${data.kycInfo.join(", ")}`,
-        16,
-        yPosition
-      );
-      yPosition += 7;
-      if (data.otherKycInfo) {
-        pdf.text(`   - Other: ${data.otherKycInfo}`, 16, yPosition);
-        yPosition += 7;
-      }
-      pdf.text(`14. Customer Consent: ${data.customerConsent}`, 16, yPosition);
-      yPosition += 7;
-      pdf.text(`15. Credit Scoring: ${data.creditScoring}`, 16, yPosition);
-      yPosition += 7;
-      if (data.creditScoringDescription) {
-        pdf.text(
-          `   - Description: ${data.creditScoringDescription}`,
-          16,
-          yPosition
-        );
-        yPosition += 7;
-      }
-      yPosition += 15;
-
-      // SECTION D: Loan Product Interest
-      pdf.setFontSize(14);
-      pdf.text("SECTION D: Loan Product Interest", 14, yPosition);
-      yPosition += 10;
-
-      pdf.text(
-        `16. Loan Products: ${data.loanProducts.join(", ")}`,
-        16,
-        yPosition
-      );
-      yPosition += 7;
-      pdf.text(`17. Loan Amount Range: ${data.loanAmountRange}`, 16, yPosition);
-      yPosition += 7;
-      pdf.text(
-        `18. Repayment Duration: ${data.repaymentDuration}`,
-        16,
-        yPosition
-      );
-      yPosition += 15;
-
-      // SECTION E: Technical Integration
-      pdf.setFontSize(14);
-      pdf.text("SECTION E: Technical Integration", 14, yPosition);
-      yPosition += 10;
-
-      pdf.text(`19. Development Team: ${data.devTeam}`, 16, yPosition);
-      yPosition += 7;
-      pdf.text(
-        `20. Integration Timeline: ${data.integrationTimeline}`,
-        16,
-        yPosition
-      );
-      yPosition += 15;
-
-      // SECTION F: Compliance
-      pdf.setFontSize(14);
-      pdf.text("SECTION F: Compliance", 14, yPosition);
-      yPosition += 10;
-
-      pdf.text(`21. Regulated: ${data.regulated}`, 16, yPosition);
-      yPosition += 7;
-      if (data.regulatedDetails) {
-        pdf.text(`   - Details: ${data.regulatedDetails}`, 16, yPosition);
-        yPosition += 7;
-      }
-      pdf.text(`22. KYC Agreement: ${data.kycAgreement}`, 16, yPosition);
+      // Generate beautiful PDF
+      const pdf = generateBeautifulPDF(data);
 
       // Save PDF first
-      pdf.save("Partnership_Application.pdf");
+      pdf.save(`Partnership_Application_${data.legalCompanyName}.pdf`);
 
-      // Generate PDF as base64 string
+      // Generate PDF as blob for email attachment
       const pdfBlob = pdf.output("blob");
+      const pdfUrl = URL.createObjectURL(pdfBlob);
 
       // Create download link and trigger download
-      const pdfUrl = URL.createObjectURL(pdfBlob);
       const link = document.createElement("a");
       link.href = pdfUrl;
       link.download = `Partnership_Application_${data.legalCompanyName}.pdf`;
@@ -407,8 +571,7 @@ const PartnershipForm = () => {
 
   if (isSuccess) {
     const handleGoBack = () => {
-      // Replace this with your actual navigation logic
-      window.location.reload(); // or use navigate("/"), router.push("/"), etc.
+      window.location.reload();
     };
 
     return (

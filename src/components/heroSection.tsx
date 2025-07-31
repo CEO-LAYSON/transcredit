@@ -55,10 +55,10 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#005452",
         secondary: "#003A38",
-        accent: "#B00000", // Changed to deep red
+        accent: "#E63946", // Vibrant red
         overlay: "rgba(0, 84, 82, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF",
+        textSecondary: "#F1FAEE",
         textAccent: "#FFFFFF",
       },
     },
@@ -78,10 +78,10 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#1A3E6F",
         secondary: "#0D3C11",
-        accent: "#B00000", // Changed to deep red
+        accent: "#E63946", // Vibrant red
         overlay: "rgba(26, 62, 111, 0.3)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF",
+        textSecondary: "#F1FAEE",
         textAccent: "#FFFFFF",
       },
     },
@@ -101,10 +101,10 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#005452",
         secondary: "#003A38",
-        accent: "#B00000", // Changed to deep red
+        accent: "#E63946", // Vibrant red
         overlay: "rgba(0, 84, 82, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF",
+        textSecondary: "#F1FAEE",
         textAccent: "#FFFFFF",
       },
     },
@@ -124,10 +124,10 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#311B92",
         secondary: "#1A1260",
-        accent: "#B00000", // Changed to deep red
+        accent: "#E63946", // Vibrant red
         overlay: "rgba(49, 27, 146, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF",
+        textSecondary: "#F1FAEE",
         textAccent: "#FFFFFF",
       },
     },
@@ -147,10 +147,10 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#005452",
         secondary: "#003A38",
-        accent: "#B00000", // Changed to deep red
+        accent: "#E63946", // Vibrant red
         overlay: "rgba(0, 84, 82, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF",
+        textSecondary: "#F1FAEE",
         textAccent: "#FFFFFF",
       },
     },
@@ -170,10 +170,10 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#1B5E20",
         secondary: "#0D3C11",
-        accent: "#B00000", // Changed to deep red
+        accent: "#E63946", // Vibrant red
         overlay: "rgba(27, 94, 32, 0.5)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF",
+        textSecondary: "#F1FAEE",
         textAccent: "#FFFFFF",
       },
     },
@@ -193,10 +193,10 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#311B92",
         secondary: "#1A1260",
-        accent: "#B00000", // Changed to deep red
+        accent: "#E63946", // Vibrant red
         overlay: "rgba(49, 27, 146, 0.4)",
         text: "#FFFFFF",
-        textSecondary: "#FFFFFF",
+        textSecondary: "#F1FAEE",
         textAccent: "#FFFFFF",
       },
     },

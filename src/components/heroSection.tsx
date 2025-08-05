@@ -55,7 +55,7 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#005452",
         secondary: "#003A38",
-        accent: "#E63946", // Vibrant red
+        accent: "#E63946",
         overlay: "rgba(0, 84, 82, 0.4)",
         text: "#FFFFFF",
         textSecondary: "#F1FAEE",
@@ -78,7 +78,7 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#1A3E6F",
         secondary: "#0D3C11",
-        accent: "#E63946", // Vibrant red
+        accent: "#E63946",
         overlay: "rgba(26, 62, 111, 0.3)",
         text: "#FFFFFF",
         textSecondary: "#F1FAEE",
@@ -97,11 +97,11 @@ const backgrounds: BackgroundContent[] = [
         "Seamless access through digital channels",
       ],
       ctaText: "Apply for Capital",
-      badgeText: "$100M+ disbursed",
+      badgeText: "100M+ disbursed",
       colorScheme: {
         primary: "#005452",
         secondary: "#003A38",
-        accent: "#E63946", // Vibrant red
+        accent: "#E63946",
         overlay: "rgba(0, 84, 82, 0.4)",
         text: "#FFFFFF",
         textSecondary: "#F1FAEE",
@@ -170,7 +170,7 @@ const backgrounds: BackgroundContent[] = [
       colorScheme: {
         primary: "#1B5E20",
         secondary: "#0D3C11",
-        accent: "#E63946", // Vibrant red
+        accent: "#E63946",
         overlay: "rgba(27, 94, 32, 0.5)",
         text: "#FFFFFF",
         textSecondary: "#F1FAEE",
